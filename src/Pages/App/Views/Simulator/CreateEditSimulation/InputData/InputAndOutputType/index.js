@@ -9,7 +9,13 @@ import { Col, Row } from "../../../../../../../styles";
 import { translate } from "../../../../../../../utils/globalFunctions";
 import { ShowColumns } from "../../style";
 
-export function InputAndOutputType({ input, setInput, customers, profile }) {
+export function InputAndOutputType({
+  input,
+  setInput,
+  customers,
+  profile,
+  isGenerated,
+}) {
   const showColumnsHandler = (key) => {
     setInput((prevState) => {
       const newState = JSON.parse(JSON.stringify(prevState));
@@ -97,7 +103,18 @@ export function InputAndOutputType({ input, setInput, customers, profile }) {
           />
         </Col>
         <Col>
-          {+input.population > 1 && (
+          <Input
+            type="input"
+            item={input}
+            setItem={setInput}
+            params="nome"
+            label={translate("Simulation Name", profile.language)}
+            required={isGenerated}
+          />
+        </Col>
+
+        {+input.population > 1 && (
+          <Col>
             <Content>
               <label>
                 {translate("Select the Output values type", profile.language)}
@@ -120,9 +137,9 @@ export function InputAndOutputType({ input, setInput, customers, profile }) {
                   value="populacao"
                 />
               </CheckboxItems>
-            </Content>
-          )}
-        </Col>
+            </Content>{" "}
+          </Col>
+        )}
       </Row>
       <Content>
         <label>{translate("Select the Output Items", profile.language)}</label>

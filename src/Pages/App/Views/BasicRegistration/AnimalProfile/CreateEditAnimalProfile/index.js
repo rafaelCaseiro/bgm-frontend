@@ -14,12 +14,21 @@ import {
   Row,
   Separator,
 } from "../../../../../../styles";
-import { translate } from "../../../../../../utils/globalFunctions";
+import {
+  convertNumberToString,
+  translate,
+} from "../../../../../../utils/globalFunctions";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesome } from "../../../../../../Components/FontAwesome";
+import { Tab, Tabs } from "@material-ui/core";
+import { Icons } from "../../../../../../Components/Icons";
+import { Line } from "react-chartjs-2";
+import { Chart as ChartJS, registerables } from "chart.js";
 
 export function CreateEditAnimalProfile(props) {
+  ChartJS.register(...registerables);
+
   const { profile } = useContext(Profile);
 
   const params = useParams();
@@ -49,6 +58,74 @@ export function CreateEditAnimalProfile(props) {
   });
 
   const [getAnimalProfile, setGetAnimalProfile] = useState(true);
+
+  const [tab, setTab] = useState(0);
+
+  const [simulations, setSimulations] = useState([]);
+
+  const [simulation, setSimulation] = useState([]);
+
+  const [calibrarion, setCalibrarion] = useState({
+    simulation: "",
+    conditions: [
+      {
+        age: "",
+        obsWeight: "",
+        estWeight: "",
+      },
+    ],
+  });
+
+  const options = {
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: false,
+        text: translate("", profile.language),
+      },
+    },
+  };
+
+  const add = () => {
+    setCalibrarion((prevState) => {
+      const newState = JSON.parse(JSON.stringify(prevState));
+      newState.conditions.push({
+        age: "",
+        obsWeight: "",
+        estWeight: "",
+      });
+      return newState;
+    });
+  };
+
+  const remove = (index) => {
+    setCalibrarion((prevState) => {
+      const newState = JSON.parse(JSON.stringify(prevState));
+      newState.conditions.splice(index, 1);
+      return newState;
+    });
+  };
+
+  const calibrate = async () => {
+    try {
+      const query = JSON.parse(JSON.stringify(calibrarion));
+      query.conditions = query.conditions.map(({ age, obsWeight }) => ({
+        age,
+        obsWeight,
+        estWeight:
+          simulation?.filter((item) => +age === +item.age)[0]?.Weight || 0,
+      }));
+      const response = await api.post("animalprofile/" + params.id, query);
+    } catch (e) {
+      Swal.fire(
+        translate("Calibrate Animal Profile", profile.translate),
+        translate("Error calibrating Animal Profile", profile.translate),
+        "error"
+      );
+    }
+  };
 
   const saveAnimalProfile = async (e) => {
     try {
@@ -152,8 +229,13 @@ export function CreateEditAnimalProfile(props) {
             "error"
           );
         }
-
         setAnimalProfile(responseAnimalProfile.data);
+        const responseSimulations = await api.post("filter/list", {
+          model: "simulation",
+          sort: "nome",
+          select: "nome customer",
+        });
+        setSimulations(responseSimulations.data);
       }
     };
     if (getAnimalProfile) {
@@ -161,6 +243,16 @@ export function CreateEditAnimalProfile(props) {
       loadAnimalProfile();
     }
   }, [getAnimalProfile, params, navigate, profile]);
+
+  useEffect(() => {
+    const getSimulation = async () => {
+      const response = await api.get("simulation/" + calibrarion.simulation);
+      setSimulation(response.data.response.individuo);
+    };
+    if (calibrarion.simulation) {
+      getSimulation();
+    }
+  }, [calibrarion.simulation]);
 
   return (
     <>
@@ -186,7 +278,7 @@ export function CreateEditAnimalProfile(props) {
       />
       <Block className="animate__animated animate__fadeInUp">
         <BlockHeader>
-          {translate("Fill in Animal Profile data", profile.translate)}
+          {translate("Animal Profile", profile.translate)}
           <Input
             type="switch"
             item={animalProfile}
@@ -197,183 +289,369 @@ export function CreateEditAnimalProfile(props) {
           />
         </BlockHeader>
         <BlockBody>
-          <form onSubmit={(e) => saveAnimalProfile(e)}>
-            <Row>
-              <Col>
-                <Input
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="nome"
-                  required
-                  label={translate("Animal Profile Name", profile.language)}
-                />
-              </Col>
-              <Col>
-                <Input
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params={`customer`}
-                  type="autocomplete"
-                  label={translate("Customer", profile.language)}
-                  paramsGet={["name"]}
-                  paramsLabel={["name"]}
-                  select={"name"}
-                  model={"customer"}
-                  placeholder={translate(
-                    "Type the customer name",
-                    profile.language
-                  )}
-                />
-              </Col>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="pesoIni"
-                  required
-                  label={translate("Peso Initial (g)", profile.language)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="taxaProt"
-                  required
-                  label={translate("Protein dep. Ratio (d)", profile.language)}
-                />
-              </Col>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="protMatur"
-                  required
-                  label={translate("Maturity Protein (g)", profile.language)}
-                />
-              </Col>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="lipProtMatur"
-                  required
-                  label={translate(
-                    "Lipid / Protein ratio at Maturity",
-                    profile.language
-                  )}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="taxaProtPenas"
-                  required
-                  label={translate(
-                    "Feather Protein dep. Ratio (d)",
-                    profile.language
-                  )}
-                />
-              </Col>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="protPenasMatur"
-                  required
-                  label={translate(
-                    "Feather Maturity Protein (g)",
-                    profile.language
-                  )}
-                />
-              </Col>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="coefA"
-                  required
-                  label={translate(
-                    "Coef. a (Water / Protein)",
-                    profile.language
-                  )}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="coefB"
-                  required
-                  label={translate(
-                    "Coef. b (Water / Protein)",
-                    profile.language
-                  )}
-                />
-              </Col>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="mineralA"
-                  required
-                  label={translate("Mineral a (g)", profile.language)}
-                />
-              </Col>
-              <Col>
-                <Input
-                  inputType="number"
-                  type="input"
-                  item={animalProfile}
-                  setItem={setAnimalProfile}
-                  params="MineralB"
-                  required
-                  label={translate("Mineral b (g)", profile.language)}
-                />
-              </Col>
-            </Row>
-            <Separator />
-            <Row>
-              <Col style={{ alignItems: "center" }}>
-                <Button
-                  notFull
-                  type="submit"
-                  bg="default"
-                  border="default"
-                  color="white"
-                >
-                  {translate("Save", profile.language)}
-                  &nbsp;
-                </Button>
-              </Col>
-            </Row>
-          </form>
+          <Tabs
+            value={tab}
+            indicatorColor="default"
+            textColor="default"
+            variant="scrollable"
+            scrollButtons="on"
+            onChange={(e, value) => {
+              setTab(value);
+            }}
+          >
+            <Tab label={translate("Data", profile.language)} />
+            <Tab label={translate("Calibration", profile.language)} />
+          </Tabs>
+          {tab === 0 && (
+            <form onSubmit={(e) => saveAnimalProfile(e)}>
+              <Row>
+                <Col>
+                  <Input
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="nome"
+                    required
+                    label={translate("Animal Profile Name", profile.language)}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params={`customer`}
+                    type="autocomplete"
+                    label={translate("Customer", profile.language)}
+                    paramsGet={["name"]}
+                    paramsLabel={["name"]}
+                    select={"name"}
+                    model={"customer"}
+                    placeholder={translate(
+                      "Type the customer name",
+                      profile.language
+                    )}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="pesoIni"
+                    required
+                    label={translate("Peso Initial (g)", profile.language)}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="taxaProt"
+                    required
+                    label={translate(
+                      "Protein dep. Ratio (d)",
+                      profile.language
+                    )}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="protMatur"
+                    required
+                    label={translate("Maturity Protein (g)", profile.language)}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="lipProtMatur"
+                    required
+                    label={translate(
+                      "Lipid / Protein ratio at Maturity",
+                      profile.language
+                    )}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="taxaProtPenas"
+                    required
+                    label={translate(
+                      "Feather Protein dep. Ratio (d)",
+                      profile.language
+                    )}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="protPenasMatur"
+                    required
+                    label={translate(
+                      "Feather Maturity Protein (g)",
+                      profile.language
+                    )}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="coefA"
+                    required
+                    label={translate(
+                      "Coef. a (Water / Protein)",
+                      profile.language
+                    )}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="coefB"
+                    required
+                    label={translate(
+                      "Coef. b (Water / Protein)",
+                      profile.language
+                    )}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="mineralA"
+                    required
+                    label={translate("Mineral a (g)", profile.language)}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    inputType="number"
+                    type="input"
+                    item={animalProfile}
+                    setItem={setAnimalProfile}
+                    params="MineralB"
+                    required
+                    label={translate("Mineral b (g)", profile.language)}
+                  />
+                </Col>
+              </Row>
+              <Separator />
+              <Row>
+                <Col style={{ alignItems: "center" }}>
+                  <Button
+                    notFull
+                    type="submit"
+                    bg="default"
+                    border="default"
+                    color="white"
+                  >
+                    {translate("Save", profile.language)}
+                    &nbsp;
+                  </Button>
+                </Col>
+              </Row>
+            </form>
+          )}
+          {tab === 1 && (
+            <>
+              <Row>
+                <Col size={1}>
+                  <Input
+                    type="select"
+                    label={translate("Simulation", profile.language)}
+                    placeholder={translate(
+                      "Select Simulation",
+                      profile.language
+                    )}
+                    item={calibrarion}
+                    setItem={setCalibrarion}
+                    params="simulation"
+                    options={simulations
+                      .filter(({ customer }) =>
+                        animalProfile.customer
+                          ? customer === animalProfile.customer || !customer
+                          : true
+                      )
+                      .map(({ _id, nome }) => ({
+                        value: _id,
+                        label: nome,
+                      }))}
+                  />
+                </Col>
+                <Col size={3}>
+                  <Row>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                  </Row>
+                  {calibrarion.conditions.map((item, index) => (
+                    <Row key={index}>
+                      <Col>
+                        <Input
+                          type="inputOnly"
+                          placeholder={translate("Age", profile.language)}
+                          item={calibrarion}
+                          setItem={setCalibrarion}
+                          params={`conditions.${index}.age`}
+                          disabled={!calibrarion.simulation}
+                        />
+                      </Col>
+                      <Col>
+                        <Input
+                          type="inputOnly"
+                          placeholder={translate(
+                            "Observed Live Weight (g)",
+                            profile.language
+                          )}
+                          item={calibrarion}
+                          setItem={setCalibrarion}
+                          params={`conditions.${index}.obsWeight`}
+                          disabled={!calibrarion.simulation}
+                        />
+                      </Col>
+                      <Col>
+                        <Input
+                          type="inputOnly"
+                          placeholder={translate(
+                            "Estimated Live Weight (g)",
+                            profile.language
+                          )}
+                          item={calibrarion}
+                          setItem={setCalibrarion}
+                          params={`conditions.${index}.estWeight`}
+                          disabled={true}
+                          value={convertNumberToString(
+                            simulation?.filter(
+                              ({ age }) => age === +item.age
+                            )[0]?.Weight || 0,
+                            0
+                          )}
+                        />
+                      </Col>
+                      <Col
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          gap: 10,
+                        }}
+                      >
+                        {index === calibrarion.conditions.length - 1 && (
+                          <Button
+                            bg="success"
+                            color="white"
+                            border="success"
+                            style={{ width: 50 }}
+                            onClick={add}
+                          >
+                            <Icons type="plus" color="white" size="19" />
+                          </Button>
+                        )}
+
+                        {index > 0 && (
+                          <Button
+                            bg="danger"
+                            color="white"
+                            border="danger"
+                            style={{ width: 50 }}
+                            onClick={() => remove(index)}
+                          >
+                            <Icons type="trash" color="white" size="19" />
+                          </Button>
+                        )}
+                      </Col>
+                    </Row>
+                  ))}
+                </Col>
+              </Row>
+              <Line
+                options={options}
+                data={{
+                  labels: [0, ...calibrarion.conditions.map(({ age }) => age)],
+                  datasets: [
+                    {
+                      label: translate(
+                        "Observed Live Weight (g)",
+                        profile.language
+                      ),
+                      data: [
+                        0,
+                        ...calibrarion.conditions.map(
+                          ({ obsWeight }) => obsWeight
+                        ),
+                      ],
+                      borderColor: "rgb(9, 64, 148)",
+                      backgroundColor: "rgba(9, 64, 148, 0.5)",
+                    },
+                    {
+                      label: translate(
+                        "Estimated Live Weight (g)",
+                        profile.language
+                      ),
+                      data: [
+                        0,
+                        ...calibrarion.conditions.map(
+                          (item) =>
+                            simulation?.filter(
+                              ({ age }) => age === +item.age
+                            )[0]?.Weight || 0
+                        ),
+                      ],
+                      borderColor: "rgb(255, 99, 132)",
+                      backgroundColor: "rgba(255, 99, 132, 0.5)",
+                    },
+                  ],
+                }}
+              />
+              <Separator />
+              <Row>
+                <Col style={{ alignItems: "center" }}>
+                  <Button
+                    notFull
+                    type="button"
+                    bg="default"
+                    border="default"
+                    color="white"
+                    onClick={calibrate}
+                  >
+                    {translate("Calibrate", profile.language)}
+                    &nbsp;
+                  </Button>
+                </Col>
+              </Row>
+            </>
+          )}
         </BlockBody>
       </Block>
     </>

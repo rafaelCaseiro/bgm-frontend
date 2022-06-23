@@ -50,7 +50,7 @@ export function IngredientsInput({
       <Header>
         <tr>
           <th style={{ width: 250 }}>
-            {translate("Parameters", profile.language)}
+            {translate("Diet Parameters", profile.language)}
           </th>
           {input.diet.map((item, index) => (
             <th>

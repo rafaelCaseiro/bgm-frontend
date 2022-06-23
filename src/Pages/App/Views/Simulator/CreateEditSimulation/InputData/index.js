@@ -1,7 +1,9 @@
 import React from "react";
+import Loading from "react-loading";
 import { Button } from "../../../../../../Components/Button";
 import { FontAwesome } from "../../../../../../Components/FontAwesome";
 import { ButtonContent, Separator } from "../../../../../../styles";
+import { translate } from "../../../../../../utils/globalFunctions";
 import { FeedFormulatorInput } from "./FeedFormulatorInput";
 import { IngredientsInput } from "./IngredientsInput";
 import { InputAndOutputType } from "./InputAndOutputType";
@@ -18,6 +20,8 @@ export function InputData({
   dietPrograms,
   environmentVariables,
   ingredients,
+  loading,
+  isGenerated,
 }) {
   const dietConfig = [
     { label: "Final Age (d)", key: "finalAge" },
@@ -51,6 +55,7 @@ export function InputData({
         customers={customers}
         input={input}
         setInput={setInput}
+        isGenerated={isGenerated}
       />
       <Separator />
       {
@@ -103,8 +108,29 @@ export function InputData({
           color="white"
           style={{ width: "auto" }}
         >
-          Simulate &nbsp;{" "}
-          <FontAwesome type="solid" name="save" size="12" color="white" />
+          {loading ? (
+            <>
+              <Loading
+                style={{
+                  fill: "#fff",
+                  height: "15px",
+                  width: "13px",
+                  display: "inline-table",
+                }}
+                type="spin"
+                color="#fff"
+                height={19}
+                width={19}
+              />
+              &nbsp; Aguarde...
+            </>
+          ) : (
+            <>
+              {translate("Simulate", profile.language)}
+              &nbsp;{" "}
+              <FontAwesome type="solid" name="gears" size="12" color="white" />
+            </>
+          )}
         </Button>
       </ButtonContent>
     </>

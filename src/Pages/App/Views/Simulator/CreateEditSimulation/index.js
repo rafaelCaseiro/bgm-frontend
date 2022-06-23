@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { FontAwesome } from "../../../../../Components/FontAwesome";
 import { SubHeader } from "../../../../../Components/SubHeader";
-import { Block, BlockBody } from "../../../../../styles";
+import { Block, BlockBody, Col, Row, Separator } from "../../../../../styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { InputData } from "./InputData";
@@ -17,9 +17,20 @@ import {
   convertNumberToString,
   translate,
 } from "../../../../../utils/globalFunctions";
+import { Button } from "../../../../../Components/Button";
+import Loading from "react-loading";
+import { useNavigate, useParams } from "react-router-dom";
+import { Chart as ChartJS, registerables } from "chart.js";
+import { Line } from "react-chartjs-2";
+import { Input } from "../../../../../Components/Input";
 
 export function CreateEditSimulation(props) {
+  ChartJS.register(...registerables);
   const { profile } = useContext(Profile);
+
+  const params = useParams();
+
+  const navigate = useNavigate();
 
   const [tab, setTab] = useState(0);
 
@@ -41,11 +52,14 @@ export function CreateEditSimulation(props) {
 
   const [loading, setLoading] = useState(false);
 
+  const [loadingSave, setLoadingSave] = useState(false);
+
   const [getData, setGetData] = useState(true);
 
   const [isGenerated, setIsGenerated] = useState(false);
 
   const [input, setInput] = useState({
+    nome: "",
     simulationType: "feedFormulator",
     outputType: "basic",
     outputItems: {
@@ -54,6 +68,7 @@ export function CreateEditSimulation(props) {
         label: "Body composition",
         checked: true,
         showColumns: false,
+        graphData: "Weight",
         columns: {
           Weight: { label: "Weight (g)", checked: true, decimals: 2 },
           Feather: { label: "Feather weight (g)", checked: true, decimals: 2 },
@@ -77,6 +92,7 @@ export function CreateEditSimulation(props) {
         label: "Genetic Potential",
         checked: true,
         showColumns: false,
+        graphData: "DesiredProteinDepositionBody",
         columns: {
           DesiredProteinDepositionBody: {
             label: "Potential of body protein dep. (g)",
@@ -100,6 +116,7 @@ export function CreateEditSimulation(props) {
         label: "Energy Partitioning",
         checked: true,
         showColumns: false,
+        graphData: "EERequired",
         columns: {
           EERequired: {
             label: "EE requirement (kJ)",
@@ -128,6 +145,7 @@ export function CreateEditSimulation(props) {
         label: "Amino Acids Requirements (mg)",
         checked: true,
         showColumns: false,
+        graphData: "DesiredLysrequired",
         columns: {
           DesiredLysrequired: { label: "Lysine", checked: true, decimals: 2 },
           DesiredMetrequired: {
@@ -175,6 +193,7 @@ export function CreateEditSimulation(props) {
         label: "Amino Acid Requirements (% diet)",
         checked: true,
         showColumns: false,
+        graphData: "DesiredLysrequiredDiet",
         columns: {
           DesiredLysrequiredDiet: {
             label: "Lysine",
@@ -238,6 +257,7 @@ export function CreateEditSimulation(props) {
         label: "Macrominerals",
         checked: true,
         showColumns: false,
+        graphData: "STTD_P_req",
         columns: {
           STTD_P_req: {
             label: "Standardized Ileal Digestible Phosphorus (mg)",
@@ -266,6 +286,7 @@ export function CreateEditSimulation(props) {
         label: "Performance",
         checked: true,
         showColumns: false,
+        graphData: "Weight",
         columns: {
           Weight: { label: "Body Weight (g)", checked: true, decimals: 2 },
           Gain: { label: "Body Weight Gain (g)", checked: true, decimals: 2 },
@@ -291,6 +312,7 @@ export function CreateEditSimulation(props) {
         label: "Cut yield",
         checked: true,
         showColumns: false,
+        graphData: "Weight",
         columns: {
           Weight: { label: "Body Weight (g)", checked: true, decimals: 2 },
           Breast: { label: "Breast (g)", checked: true, decimals: 2 },
@@ -303,6 +325,7 @@ export function CreateEditSimulation(props) {
         label: "Heat Production",
         checked: true,
         showColumns: false,
+        graphData: "TotalHeatLossMax",
         columns: {
           TotalHeatLossMax: {
             label: "maximum Heat Production (KJ)",
@@ -326,6 +349,7 @@ export function CreateEditSimulation(props) {
         label: "Performance: Potential vs. Real",
         checked: true,
         showColumns: false,
+        graphData: "DesiredProteinDepositionBody",
         columns: {
           DesiredProteinDepositionBody: {
             label: "desired Protein Deposition (g)",
@@ -354,6 +378,7 @@ export function CreateEditSimulation(props) {
         label: "Performance",
         checked: true,
         showColumns: false,
+        graphData: "Weight",
         columns: {
           Weight: { label: "Body Weight (g)", checked: true, decimals: 2 },
           Gain: { label: "Body Weight Gain (g)", checked: true, decimals: 2 },
@@ -374,6 +399,7 @@ export function CreateEditSimulation(props) {
         label: "Requirement",
         checked: true,
         showColumns: false,
+        graphData: "EERequired",
         columns: {
           EERequired: {
             label: "Effective Energy (Mj)",
@@ -427,60 +453,148 @@ export function CreateEditSimulation(props) {
     condition: "age",
     hpStatus: 1,
     pelletFeed: "Mash",
-    initialWeight: "40",
+    initialWeight: "",
     feedDigestiblity: 1,
     healthProblem: "coccidia",
     start: 1,
-    end: 42,
-    diet: [
-      {
-        PelletFeed: "Mash",
-        Phytase: "",
-        ingredients: [
-          1.0165578181818182, 0.1, 0.1, 65.07303172727273, 29.665275090909088,
-          0.29277609090909085, 0.2837571818181818, 0.2701740909090909,
-          0.8734124545454546, 1.8525732727272728, 0.4724424545454546,
-        ],
-      },
-    ],
-    ingredients: [
-      "629a50003386c5b7068a2b77",
-      "629a50003386c5b7068a2b8d",
-      "629a50003386c5b7068a2b8c",
-      "629a50003386c5b7068a2b72",
-      "629a50003386c5b7068a2b83",
-      "629a50003386c5b7068a2b66",
-      "629a50003386c5b7068a2b58",
-      "629a50003386c5b7068a2b67",
-      "629a50003386c5b7068a2b53",
-      "629a50003386c5b7068a2b60",
-      "629a50003386c5b7068a2b7d",
-    ],
+    end: "",
+    diet: [],
+    ingredients: [],
     customer: "",
     population: 1,
   });
 
   const [response, setResponse] = useState({});
 
-  const simulate = async (e) => {
-    e.preventDefault();
+  const [simulations, setSimulations] = useState([]);
+
+  const saveSimulation = async (e) => {
     try {
-      setLoading(true);
-      const response = await api.post("simulate", input);
-      setResponse(response.data);
-      setLoading(false);
-      setIsGenerated(true);
+      setLoadingSave(true);
+
+      const query = JSON.parse(JSON.stringify(input));
+      if (!input.nome) {
+        setLoadingSave(false);
+        return Swal.fire(
+          translate("Error", profile.translate),
+          translate("Type the simulation name", profile.translate),
+          "error"
+        );
+      }
+      if (!input.customer) {
+        query.customer = null;
+      }
+      query.response = response;
+      if (params.id) {
+        const responseSimulation = await Swal.fire({
+          title: translate("Edit Simulation", profile.translate),
+          text: translate(
+            "Do you want to confirm Simulation save",
+            profile.translate
+          ),
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#0451e8",
+          cancelButtonColor: "#d33",
+          confirmButtonText: translate(
+            "Yes, Edit Simulation!",
+            profile.translate
+          ),
+          showLoaderOnConfirm: true,
+          preConfirm: async () =>
+            await api.put("simulation/" + params.id, query).catch((err) => ({
+              err: true,
+              data: { message: err.response.data.message },
+            })),
+        });
+        Swal.fire(
+          translate("Edit Simulation", profile.translate),
+          translate(responseSimulation.value.data.message, profile.translate),
+          responseSimulation.value.err ? "error" : "success"
+        );
+      } else {
+        const responseSimulation = await Swal.fire({
+          title: translate("Create Simulation", profile.translate),
+          text: translate(
+            "Do you want to confirm Simulation creation",
+            profile.translate
+          ),
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#0451e8",
+          cancelButtonColor: "#d33",
+          confirmButtonText: translate(
+            "Yes, Create Simulation!",
+            profile.translate
+          ),
+          showLoaderOnConfirm: true,
+          preConfirm: async () =>
+            await api.post("simulation", query).catch((err) => ({
+              err: true,
+              data: { message: err.response.data.message },
+            })),
+        });
+        Swal.fire(
+          translate("Create Simulation", profile.translate),
+          translate(responseSimulation.value.data.message, profile.translate),
+          responseSimulation.value.err ? "error" : "success"
+        );
+        navigate("/simulator/simulation/edit/" + response.value.data.id, {
+          replace: true,
+        });
+      }
+
+      setLoadingSave(false);
+      setGetData(true);
     } catch (e) {
       Swal.fire(
-        translate("Simulate", profile.translate),
-        translate(e.message, profile.translate),
+        translate("Save Simulation", profile.translate),
+        translate("Error saving Simulation", profile.translate),
         "error"
       );
+      setLoadingSave(false);
     }
   };
 
+  const options = {
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: tabKey
+          ? translate(input.outputItems[tabKey]?.label, profile.language)
+          : "",
+      },
+    },
+  };
+
+  const simulate = useCallback(
+    async (input, e) => {
+      e?.preventDefault();
+      try {
+        setLoading(true);
+        const response = await api.post("simulate", input);
+        setResponse(response.data);
+        setLoading(false);
+        setIsGenerated(true);
+
+        window.scrollTo(0, 0);
+      } catch (e) {
+        Swal.fire(
+          translate("Simulate", profile.translate),
+          translate(e.message, profile.translate),
+          "error"
+        );
+      }
+    },
+    [profile.translate]
+  );
+
   useEffect(() => {
     const getInitData = async () => {
+      setLoadingData(true);
       const responseDietProgram = await api.post("filter/list", {
         model: "dietProgram",
         sort: "nome",
@@ -518,181 +632,25 @@ export function CreateEditSimulation(props) {
         select: "nome customer",
       });
       setIngredients(responseIngredient.data);
+      const responseSimulations = await api.post("filter/list", {
+        model: "simulation",
+        sort: "nome",
+        select: "nome customer",
+      });
+      setSimulations(responseSimulations.data);
+      if (params.id) {
+        const responseSimulation = await api.get("simulation/" + params.id);
+        setInput(responseSimulation.data);
+        simulate(responseSimulation.data);
+      }
+
       setLoadingData(false);
     };
-    if (loadingData) {
+    if (getData) {
       setGetData(false);
       getInitData();
     }
-  }, [loadingData]);
-
-  useEffect(() => {
-    console.log(input.outputValue);
-    console.log(response[input.outputValue]);
-  }, [input.outputValue, response]);
-
-  /*  useEffect(() => {
-    const simulate = async () => {
-      const data = {
-        initialAge: 1,
-        finalAge: 42,
-        InitialBWsimulation: 44,
-        MatureLipidToProtein: 1.8,
-        aW: 2.001,
-        bW: 0.909,
-        MatureProteinBody: 1380,
-        GompertzProteinBody: 0.041,
-        MatureProteinFeather: 217,
-        EEforMaintenanceK: 1.63,
-        MaintAdjust: 1,
-        GompertzProteinFeather: 0.039,
-        AdustFI: 1,
-        diet: [
-          {
-            initialAge: 1,
-            finalAge: 14,
-            EEnergy: 11.34,
-            CP: 23,
-            Lys: 1.4,
-            Met: 0.741,
-            MetCys: 1.042,
-            Thr: 0.941,
-            Trp: 0.26,
-            Ile: 0.883,
-            Leu: 1.724,
-            Val: 0.943,
-            Phe: 1.022,
-            Tyr: 2,
-            His: 0.543,
-            Arg: 1.426,
-            WHC: 0.153,
-            MEc: 3.05,
-            PelletFeed: 1,
-            FinesFeed: 0,
-            NPP: 0.45,
-            Ca: 0.9,
-            Phytase: 500,
-            PP: 0.24,
-            DM: 90.14,
-          },
-          {
-            initialAge: 15,
-            finalAge: 28,
-            CP: 21,
-            Lys: 1.25,
-            Met: 0.667,
-            MetCys: 0.946,
-            Thr: 0.836,
-            Trp: 0.235,
-            Ile: 0.801,
-            Leu: 1.609,
-            Val: 0.861,
-            Phe: 0.932,
-            Tyr: 2,
-            His: 0.5,
-            Arg: 1.288,
-            WHC: 0.154,
-            MEc: 3.15,
-            PelletFeed: 1,
-            FinesFeed: 0,
-            NPP: 0.45,
-            Ca: 0.9,
-            Phytase: 500,
-            PP: 0.23,
-            DM: 90.19,
-          },
-          {
-            initialAge: 29,
-            finalAge: 42,
-            CP: 19.3,
-            Lys: 1.2,
-            Met: 0.848,
-            MetCys: 1.104,
-            Thr: 0.844,
-            Trp: 0.216,
-            Ile: 0.717,
-            Leu: 1.488,
-            Val: 0.785,
-            Phe: 0.84,
-            Tyr: 2,
-            His: 0.455,
-            Arg: 1.147,
-            WHC: 0.154,
-            MEc: 3.25,
-            PelletFeed: 1,
-            FinesFeed: 0,
-            NPP: 0.45,
-            Ca: 0.9,
-            Phytase: 500,
-            PP: 0.22,
-            DM: 90.29,
-          },
-        ],
-        environmentVariables: [
-          { Temp: 32, Umity: 41.6, Density: 12, Speedair: 1.5 },
-          { Temp: 32, Umity: 41.4, Density: 12, Speedair: 1.5 },
-          { Temp: 32, Umity: 39.6, Density: 12, Speedair: 1.5 },
-          { Temp: 31, Umity: 41.7, Density: 12, Speedair: 1.5 },
-          { Temp: 31, Umity: 42.4, Density: 12, Speedair: 1.5 },
-          { Temp: 31, Umity: 42.2, Density: 12, Speedair: 1.5 },
-          { Temp: 29, Umity: 41.3, Density: 12, Speedair: 1.5 },
-          { Temp: 29, Umity: 40.2, Density: 12, Speedair: 1.5 },
-          { Temp: 29, Umity: 40.4, Density: 12, Speedair: 1.5 },
-          { Temp: 28, Umity: 40.9, Density: 12, Speedair: 1.5 },
-          { Temp: 28, Umity: 40.7, Density: 12, Speedair: 1.5 },
-          { Temp: 27, Umity: 39.3, Density: 12, Speedair: 1.5 },
-          { Temp: 27, Umity: 37.1, Density: 12, Speedair: 1.5 },
-          { Temp: 27, Umity: 39.3, Density: 12, Speedair: 1.5 },
-          { Temp: 26, Umity: 39.8, Density: 12, Speedair: 1.5 },
-          { Temp: 26, Umity: 41.7, Density: 12, Speedair: 1.5 },
-          { Temp: 26, Umity: 43.1, Density: 12, Speedair: 1.5 },
-          { Temp: 25, Umity: 44.3, Density: 12, Speedair: 1.5 },
-          { Temp: 25, Umity: 46.1, Density: 12, Speedair: 1.5 },
-          { Temp: 25, Umity: 47, Density: 12, Speedair: 1.5 },
-          { Temp: 24, Umity: 47.8, Density: 12, Speedair: 1.5 },
-          { Temp: 24, Umity: 48.4, Density: 12, Speedair: 1.5 },
-          { Temp: 24, Umity: 47.4, Density: 12, Speedair: 1.5 },
-          { Temp: 24, Umity: 47.2, Density: 12, Speedair: 1.5 },
-          { Temp: 24, Umity: 49.7, Density: 12, Speedair: 1.5 },
-          { Temp: 24, Umity: 49.2, Density: 12, Speedair: 1.5 },
-          { Temp: 24, Umity: 49.3, Density: 12, Speedair: 1.5 },
-          { Temp: 23, Umity: 51.7, Density: 12, Speedair: 1.5 },
-          { Temp: 23, Umity: 51.4, Density: 12, Speedair: 1.5 },
-          { Temp: 23, Umity: 50.6, Density: 12, Speedair: 1.5 },
-          { Temp: 23, Umity: 66.5, Density: 12, Speedair: 1.5 },
-          { Temp: 23, Umity: 63, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.3, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 59.2, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 59.9, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 59.4, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 56.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.5, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 66.9, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 72.3, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 66.3, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-          { Temp: 22, Umity: 62.7, Density: 12, Speedair: 1.5 },
-        ],
-      };
-
-      const response = await api.post("simulation", data);
-      console.log(response.data);
-    };
-    simulate();
-  }, []); */
+  }, [getData, params.id, simulate]);
 
   return (
     <>
@@ -706,98 +664,293 @@ export function CreateEditSimulation(props) {
             label: translate("New Simulation", profile.language),
           },
         ]}
+        otherButtons={
+          isGenerated
+            ? [
+                <Button
+                  onClick={saveSimulation}
+                  type="button"
+                  bg="default"
+                  border="default"
+                  color="white"
+                  style={{ width: "auto" }}
+                >
+                  {loadingSave ? (
+                    <>
+                      <Loading
+                        style={{
+                          fill: "#fff",
+                          height: "15px",
+                          width: "13px",
+                          display: "inline-table",
+                        }}
+                        type="spin"
+                        color="#fff"
+                        height={19}
+                        width={19}
+                      />
+                      &nbsp; {translate("Wait", profile.language)}...
+                    </>
+                  ) : (
+                    <>
+                      {translate("Save Simulation", profile.language)}
+                      &nbsp;{" "}
+                      <FontAwesome
+                        type="solid"
+                        name="save"
+                        size="12"
+                        color="white"
+                      />
+                    </>
+                  )}
+                </Button>,
+              ]
+            : null
+        }
         icon={
           <FontAwesome type="solid" name="area-chart" size={15} color="text" />
         }
       />
       <Block>
         <BlockBody>
-          <Tabs
-            value={tab}
-            indicatorColor="default"
-            textColor="default"
-            variant="scrollable"
-            scrollButtons="on"
-            onChange={(e, value) => {
-              setTab(value);
-            }}
-          >
-            <Tab label={translate("Input", profile.language)} />
-            {Object.keys(input.outputItems)
-              .filter(
-                (key) =>
-                  input.outputItems[key].type === input.outputType &&
-                  input.outputItems[key].checked
-              )
-              .map((key) => (
-                <Tab
-                  label={translate(
-                    input.outputItems[key].label,
-                    profile.language
-                  )}
-                  onClick={() => setTabKey(key)}
-                  style={!isGenerated ? { display: "none" } : null}
-                />
-              ))}
-          </Tabs>
-          {tab === 0 ? (
-            <form onSubmit={simulate}>
-              <InputData
-                {...{
-                  input,
-                  setInput,
-                  profile,
-                  customers,
-                  environmentVariables,
-                  dietPrograms,
-                  feedRestrictionPrograms,
-                  animalProfiles,
-                  ingredients,
-                }}
-              />{" "}
-            </form>
+          {loadingData ? (
+            <Loading
+              style={{
+                fill: "#094093",
+                height: "24px",
+                width: "24px",
+                display: "inline-table",
+              }}
+              type="spin"
+              color="#fff"
+              height={24}
+              width={24}
+            />
           ) : (
-            <TableContent>
-              <Header>
-                <tr>
-                  <th>{translate("Day", profile.language)}</th>
-                  {Object.keys(input.outputItems[tabKey].columns)
-                    .filter(
-                      (key) => input.outputItems[tabKey].columns[key].checked
-                    )
-                    .map((key) => (
-                      <th>
-                        {translate(
-                          input.outputItems[tabKey].columns[key].label,
+            <>
+              <Tabs
+                value={tab}
+                indicatorColor="default"
+                textColor="default"
+                variant="scrollable"
+                scrollButtons="on"
+                onChange={(e, value) => {
+                  setTab(value);
+                }}
+              >
+                <Tab label={translate("Input", profile.language)} />
+                {Object.keys(input.outputItems)
+                  .filter(
+                    (key) =>
+                      input.outputItems[key].type === input.outputType &&
+                      input.outputItems[key].checked
+                  )
+                  .map((key) => (
+                    <Tab
+                      label={translate(
+                        input.outputItems[key].label,
+                        profile.language
+                      )}
+                      onClick={() => setTabKey(key)}
+                      style={!isGenerated ? { display: "none" } : null}
+                    />
+                  ))}
+              </Tabs>
+              {tab === 0 ? (
+                <form onSubmit={(e) => simulate(input, e)}>
+                  <InputData
+                    {...{
+                      input,
+                      setInput,
+                      profile,
+                      customers,
+                      environmentVariables,
+                      dietPrograms,
+                      feedRestrictionPrograms,
+                      animalProfiles,
+                      ingredients,
+                      loading,
+                      isGenerated,
+                    }}
+                  />{" "}
+                </form>
+              ) : (
+                <>
+                  <Row>
+                    <Col>
+                      <Input
+                        type="select"
+                        label={translate("Graph Data", profile.language)}
+                        placeholder={translate(
+                          "Select Graph Data",
                           profile.language
                         )}
-                      </th>
-                    ))}
-                </tr>
-              </Header>
-              <Body>
-                {response[input.outputValue]
-                  ?.filter(({ age }) => age >= input.start)
-                  .map((item) => (
-                    <tr key={item.age}>
-                      <td>{item.age}</td>
-                      {Object.keys(input.outputItems[tabKey].columns)
-                        .filter(
-                          (key) =>
-                            input.outputItems[tabKey].columns[key].checked
-                        )
-                        .map((key) => (
-                          <td>
-                            {convertNumberToString(
-                              item[key],
-                              input.outputItems[tabKey].columns[key].decimals
-                            )}
-                          </td>
+                        item={input}
+                        setItem={setInput}
+                        params={`outputItems.${tabKey}.graphData`}
+                        options={Object.entries(
+                          input.outputItems[tabKey].columns
+                        ).map(([key, value]) => ({
+                          value: key,
+                          label: translate(value.label, profile.language),
+                        }))}
+                      />
+                    </Col>
+                    <Col>
+                      <Input
+                        type="select"
+                        label={translate("Comparison", profile.language)}
+                        placeholder={translate(
+                          "Select Simulation",
+                          profile.language
+                        )}
+                        item={input}
+                        setItem={setInput}
+                        params={`outputItems.${tabKey}.comparison`}
+                        options={simulations
+                          .filter(({ customer }) =>
+                            input.customer
+                              ? customer === input.customer || !customer
+                              : true
+                          )
+                          .map(({ _id, nome }) => ({
+                            value: _id,
+                            label: nome,
+                          }))}
+                      />
+                    </Col>
+                    <Col></Col>
+                    <Col></Col>
+                  </Row>
+
+                  {isGenerated && (
+                    <Line
+                      options={options}
+                      data={{
+                        labels: response.individuo
+                          .filter(({ age }) => age >= input.start)
+                          .map(({ age }) => age),
+                        datasets: [
+                          {
+                            label: translate("Individuals", profile.language),
+                            data: response.individuo
+                              .filter(({ age }) => age >= input.start)
+                              .map((item) =>
+                                input.outputItems[tabKey]?.graphData
+                                  ? item[input.outputItems[tabKey]?.graphData]
+                                  : 0
+                              ),
+                            borderColor: "rgb(9, 64, 148)",
+                            backgroundColor: "rgba(9, 64, 148, 0.5)",
+                          },
+                          {
+                            label: translate("Population", profile.language),
+                            data: response.populacao
+                              ? response.populacao
+                                  .filter(({ age }) => age >= input.start)
+                                  .map((item) =>
+                                    input.outputItems[tabKey]?.graphData
+                                      ? item[
+                                          input.outputItems[tabKey]?.graphData
+                                        ]
+                                      : 0
+                                  )
+                              : [],
+                            borderColor: "rgb(255, 99, 132)",
+                            backgroundColor: "rgba(255, 99, 132, 0.5)",
+                          },
+                          ...(input.outputItems[tabKey].comparison
+                            ? [
+                                {
+                                  label: translate(
+                                    "Individuals - Comparison",
+                                    profile.language
+                                  ),
+                                  data: response.individuo
+                                    .filter(({ age }) => age >= input.start)
+                                    .map((item) =>
+                                      input.outputItems[tabKey]?.graphData
+                                        ? item[
+                                            input.outputItems[tabKey]?.graphData
+                                          ]
+                                        : 0
+                                    ),
+                                  borderColor: "rgb(50, 204, 148)",
+                                  backgroundColor: "rgba(50, 204, 148, 0.5)",
+                                },
+                                {
+                                  label: translate(
+                                    "Population - Comparison",
+                                    profile.language
+                                  ),
+                                  data: response.populacao
+                                    ? response.populacao
+                                        .filter(({ age }) => age >= input.start)
+                                        .map((item) =>
+                                          input.outputItems[tabKey]?.graphData
+                                            ? item[
+                                                input.outputItems[tabKey]
+                                                  ?.graphData
+                                              ]
+                                            : 0
+                                        )
+                                    : [],
+                                  borderColor: "rgb(555, 60, 60)",
+                                  backgroundColor: "rgba(555, 60, 60, 0.5)",
+                                },
+                              ]
+                            : []),
+                        ],
+                      }}
+                    />
+                  )}
+                  <Separator style={{ marginTop: 20 }} />
+                  <TableContent>
+                    <Header>
+                      <tr>
+                        <th>{translate("Day", profile.language)}</th>
+                        {Object.keys(input.outputItems[tabKey].columns)
+                          .filter(
+                            (key) =>
+                              input.outputItems[tabKey].columns[key].checked
+                          )
+                          .map((key) => (
+                            <th>
+                              {translate(
+                                input.outputItems[tabKey].columns[key].label,
+                                profile.language
+                              )}
+                            </th>
+                          ))}
+                      </tr>
+                    </Header>
+                    <Body>
+                      {response[input.outputValue]
+                        ?.filter(({ age }) => age >= input.start)
+                        .map((item) => (
+                          <tr key={item.age}>
+                            <td>{item.age}</td>
+                            {Object.keys(input.outputItems[tabKey].columns)
+                              .filter(
+                                (key) =>
+                                  input.outputItems[tabKey].columns[key].checked
+                              )
+                              .map((key) => (
+                                <td>
+                                  {convertNumberToString(
+                                    item[key],
+                                    input.outputItems[tabKey].columns[key]
+                                      .decimals
+                                  )}
+                                </td>
+                              ))}
+                          </tr>
                         ))}
-                    </tr>
-                  ))}
-              </Body>
-            </TableContent>
+                    </Body>
+                  </TableContent>
+                </>
+              )}
+            </>
           )}
         </BlockBody>
       </Block>

@@ -98,14 +98,14 @@ export function SideBar() {
           model: "newsimulation",
           label: "New Simulation",
           icon: "plus",
-          to: "simulator/newsimulation",
+          to: "simulator/simulation/create",
         },
         {
           model: "listofsimulations",
           label: "List of Simulations",
           icon: "list",
+          to: "simulator/simulations/1/30/index/{}",
         },
-        { model: "comparison", label: "Comparison", icon: "line-chart" },
       ],
     },
     {

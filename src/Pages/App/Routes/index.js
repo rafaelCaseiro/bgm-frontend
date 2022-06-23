@@ -18,6 +18,7 @@ import { CreateEditAnimalProfile } from "../Views/BasicRegistration/AnimalProfil
 import { ListAnimalProfiles } from "../Views/BasicRegistration/AnimalProfile/ListAnimalProfile";
 import { CreateEditEnvironmentVariables } from "../Views/BasicRegistration/EnvironmentVariables/CreateEditEnvironmentVariables";
 import { ListEnvironmentVariables } from "../Views/BasicRegistration/EnvironmentVariables/ListEnvironmentVariables";
+import { ListSimulations } from "../Views/Simulator/ListSimulation";
 
 export function Routes() {
   return (
@@ -138,12 +139,16 @@ export function Routes() {
           <Route path="/feedformulator" element={<FeedFormulator />} />
           {/* Simulation */}
           <Route
-            path="/simulator/newsimulation"
+            path="/simulator/simulation/create"
             element={<CreateEditSimulation />}
           />
           <Route
-            path="/simulator/simulation/:id"
+            path="/simulator/simulation/edit/:id"
             element={<CreateEditSimulation />}
+          />
+          <Route
+            path="/simulator/simulations/:page/:limit/:sort/:query"
+            element={<ListSimulations />}
           />
         </Switch>
       </Content>
