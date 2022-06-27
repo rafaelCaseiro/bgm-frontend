@@ -76,6 +76,8 @@ export function CreateEditAnimalProfile(props) {
     ],
   });
 
+  const [loadingCalibration, setLoadingCalibration] = useState(false);
+
   const options = {
     plugins: {
       legend: {
@@ -110,6 +112,7 @@ export function CreateEditAnimalProfile(props) {
 
   const calibrate = async () => {
     try {
+      setLoadingCalibration(true);
       const query = JSON.parse(JSON.stringify(calibrarion));
       query.conditions = query.conditions.map(({ age, obsWeight }) => ({
         age,
@@ -118,12 +121,32 @@ export function CreateEditAnimalProfile(props) {
           simulation?.filter((item) => +age === +item.age)[0]?.Weight || 0,
       }));
       const response = await api.post("animalprofile/" + params.id, query);
+      setCalibrarion((prevState) => {
+        const newState = JSON.parse(JSON.stringify(prevState));
+        newState.conditions = newState.conditions.map((item, index) => ({
+          ...item,
+          estWeight: response.data.idade[index],
+        }));
+        return newState;
+      });
+      setAnimalProfile({
+        ...animalProfile,
+        protMatur: response.data.protMatur.toFixed(0),
+        taxaProt: response.data.taxaProt.toFixed(3),
+      });
+      Swal.fire(
+        translate("Calibrate Animal Profile", profile.translate),
+        translate("Calibration successfuly generated", profile.translate),
+        "success"
+      );
+      setLoadingCalibration(false);
     } catch (e) {
       Swal.fire(
         translate("Calibrate Animal Profile", profile.translate),
         translate("Error calibrating Animal Profile", profile.translate),
         "error"
       );
+      setLoadingCalibration(false);
     }
   };
 
@@ -553,9 +576,11 @@ export function CreateEditAnimalProfile(props) {
                           params={`conditions.${index}.estWeight`}
                           disabled={true}
                           value={convertNumberToString(
-                            simulation?.filter(
-                              ({ age }) => age === +item.age
-                            )[0]?.Weight || 0,
+                            item.estWeight ||
+                              simulation?.filter(
+                                ({ age }) => age === +item.age
+                              )[0]?.Weight ||
+                              0,
                             0
                           )}
                         />
@@ -623,9 +648,11 @@ export function CreateEditAnimalProfile(props) {
                         0,
                         ...calibrarion.conditions.map(
                           (item) =>
+                            item.estWeight ||
                             simulation?.filter(
                               ({ age }) => age === +item.age
-                            )[0]?.Weight || 0
+                            )[0]?.Weight ||
+                            0
                         ),
                       ],
                       borderColor: "rgb(255, 99, 132)",
@@ -644,8 +671,11 @@ export function CreateEditAnimalProfile(props) {
                     border="default"
                     color="white"
                     onClick={calibrate}
+                    disabled={loadingCalibration}
                   >
-                    {translate("Calibrate", profile.language)}
+                    {loadingCalibration
+                      ? translate("Wait", profile.language) + "..."
+                      : translate("Calibrate", profile.language)}
                     &nbsp;
                   </Button>
                 </Col>
