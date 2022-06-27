@@ -19,6 +19,10 @@ import { translate } from "../../../../../../utils/globalFunctions";
 import ReactLoading from "react-loading";
 
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  CheckboxItems,
+  Content,
+} from "../../../../../../Components/Input/style";
 
 export function CreateEditUser(props) {
   const { profile } = useContext(Profile);
@@ -34,7 +38,7 @@ export function CreateEditUser(props) {
     responsibility: "",
     phoneNumber: "",
     status: true,
-    roles: [],
+    roles: ["user"],
     customer: null,
     _id: "",
   });
@@ -224,29 +228,6 @@ export function CreateEditUser(props) {
                     required={true}
                   />
                 </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Input
-                    type="input"
-                    mask="phoneNumber"
-                    item={user}
-                    setItem={setUser}
-                    params="phoneNumber"
-                    label={translate("Phone Number", profile.language)}
-                    placeholder={translate("Phone Number", profile.language)}
-                  />
-                </Col>
-                <Col>
-                  <Input
-                    type="input"
-                    item={user}
-                    setItem={setUser}
-                    params="responsibility"
-                    label={translate("responsibility", profile.language)}
-                    placeholder={translate("Responsibility", profile.language)}
-                  />
-                </Col>
                 {user._id && (
                   <Col>
                     <Button
@@ -278,6 +259,55 @@ export function CreateEditUser(props) {
                     </Button>
                   </Col>
                 )}
+              </Row>
+              <Row>
+                <Col>
+                  <Input
+                    type="input"
+                    mask="phoneNumber"
+                    item={user}
+                    setItem={setUser}
+                    params="phoneNumber"
+                    label={translate("Phone Number", profile.language)}
+                    placeholder={translate("Phone Number", profile.language)}
+                  />
+                </Col>
+                <Col>
+                  <Input
+                    type="input"
+                    item={user}
+                    setItem={setUser}
+                    params="responsibility"
+                    label={translate("responsibility", profile.language)}
+                    placeholder={translate("Responsibility", profile.language)}
+                  />
+                </Col>
+
+                <Col>
+                  <Content>
+                    <label>
+                      {translate("Select the role", profile.language)}
+                    </label>
+                    <CheckboxItems>
+                      <Input
+                        type="radiobox"
+                        label={translate("User", profile.language)}
+                        item={user}
+                        setItem={setUser}
+                        params="roles.0"
+                        value="user"
+                      />
+                      <Input
+                        type="radiobox"
+                        label={translate("Admin", profile.language)}
+                        item={user}
+                        setItem={setUser}
+                        params="roles.0"
+                        value="admin"
+                      />
+                    </CheckboxItems>
+                  </Content>
+                </Col>
               </Row>
             </>
             <Separator />
