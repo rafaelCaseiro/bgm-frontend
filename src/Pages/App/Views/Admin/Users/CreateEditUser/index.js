@@ -105,7 +105,9 @@ export function CreateEditUser(props) {
               response.value.data.message,
               response.value.err ? "error" : "success"
             );
-            navigate("/basicregistration/user/edit/" + response.value.data.id);
+            navigate("/basicregistration/user/edit/" + response.value.data.id, {
+              replace: true,
+            });
             setGetUser(true, { replace: true });
           }
         } else {
