@@ -4,7 +4,7 @@ import { getToken } from "./auth";
 const api = axios.create({
   baseURL:
     window.location.href.indexOf("localhost") < 0
-      ? "https://api.bgm.poultrymodel.com"
+      ? "https://api.bgm.zenbytes.com.br"
       : "http://localhost:8080",
 });
 
