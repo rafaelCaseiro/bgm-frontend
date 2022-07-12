@@ -587,6 +587,7 @@ export function CreateEditSimulation(props) {
         setIsGenerated(true);
 
         window.scrollTo(0, 0);
+        setTab(1);
       } catch (e) {
         Swal.fire(
           translate("Simulate", profile.translate),
