@@ -507,6 +507,7 @@ export function CreateEditSimulation(props) {
               data: { message: err.response.data.message },
             })),
         });
+
         Swal.fire(
           translate("Edit Simulation", profile.translate),
           translate(responseSimulation.value.data.message, profile.translate),
@@ -534,19 +535,24 @@ export function CreateEditSimulation(props) {
               data: { message: err.response.data.message },
             })),
         });
+
         Swal.fire(
           translate("Create Simulation", profile.translate),
           translate(responseSimulation.value.data.message, profile.translate),
           responseSimulation.value.err ? "error" : "success"
         );
-        navigate("/simulator/simulation/edit/" + response.value.data.id, {
-          replace: true,
-        });
+        navigate(
+          "/simulator/simulation/edit/" + responseSimulation.value.data.id,
+          {
+            replace: true,
+          }
+        );
       }
 
       setLoadingSave(false);
       setGetData(true);
     } catch (e) {
+      console.log(e);
       Swal.fire(
         translate("Save Simulation", profile.translate),
         translate("Error saving Simulation", profile.translate),
@@ -656,12 +662,18 @@ export function CreateEditSimulation(props) {
     <>
       <SubHeader
         {...props}
-        title={translate("New Simulation", profile.language)}
+        title={translate(
+          params.id ? "Edit Simulation" : "New Simulation",
+          profile.language
+        )}
         route="simulator"
         breadcrumbs={[
           { label: translate("Simulator", profile.language) },
           {
-            label: translate("New Simulation", profile.language),
+            label: translate(
+              params.id ? "Edit Simulation" : "New Simulation",
+              profile.language
+            ),
           },
         ]}
         otherButtons={

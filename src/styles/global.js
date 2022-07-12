@@ -456,4 +456,12 @@ export const GlobalStyle = createGlobalStyle`
     opacity:0.5
   }
 
+  .table-center td, .table-center th{
+    text-align:center !important
+  }
+
+  .table-no-padding td{
+    padding:0
+  }
+
 `;

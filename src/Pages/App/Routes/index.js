@@ -19,6 +19,7 @@ import { ListAnimalProfiles } from "../Views/BasicRegistration/AnimalProfile/Lis
 import { CreateEditEnvironmentVariables } from "../Views/BasicRegistration/EnvironmentVariables/CreateEditEnvironmentVariables";
 import { ListEnvironmentVariables } from "../Views/BasicRegistration/EnvironmentVariables/ListEnvironmentVariables";
 import { ListSimulations } from "../Views/Simulator/ListSimulation";
+import { CreateEditOptimization } from "../Views/Optimizator/CreateEditOptimization";
 
 export function Routes() {
   return (
@@ -148,6 +149,19 @@ export function Routes() {
           />
           <Route
             path="/simulator/simulations/:page/:limit/:sort/:query"
+            element={<ListSimulations />}
+          />
+          {/* Simulation */}
+          <Route
+            path="/optimizator/create"
+            element={<CreateEditOptimization />}
+          />
+          <Route
+            path="/optimizator/edit/:id"
+            element={<CreateEditOptimization />}
+          />
+          <Route
+            path="/optimizator/:page/:limit/:sort/:query"
             element={<ListSimulations />}
           />
         </Switch>

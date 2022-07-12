@@ -117,6 +117,7 @@ export function SideBar() {
           model: "newoptimization",
           label: "New Optimization",
           icon: "plus",
+          to: "optimizator/create",
         },
         {
           model: "listofoptimizations",
