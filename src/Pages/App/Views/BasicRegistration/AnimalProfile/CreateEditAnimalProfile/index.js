@@ -524,7 +524,7 @@ export function CreateEditAnimalProfile(props) {
                     options={simulations
                       .filter(({ customer }) =>
                         animalProfile.customer
-                          ? customer === animalProfile.customer || !customer
+                          ? customer === animalProfile.customer._id || !customer
                           : true
                       )
                       .map(({ _id, nome }) => ({
