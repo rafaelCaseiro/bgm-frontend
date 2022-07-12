@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { FontAwesome } from "../../../../../Components/FontAwesome";
 import { SubHeader } from "../../../../../Components/SubHeader";
 import { Block, BlockBody, Col, Row, Separator } from "../../../../../styles";
@@ -27,6 +33,8 @@ import { Input } from "../../../../../Components/Input";
 export function CreateEditSimulation(props) {
   ChartJS.register(...registerables);
   const { profile } = useContext(Profile);
+
+  const tabRef = useRef();
 
   const params = useParams();
 
@@ -585,9 +593,8 @@ export function CreateEditSimulation(props) {
         setResponse(response.data);
         setLoading(false);
         setIsGenerated(true);
-
         window.scrollTo(0, 0);
-        setTab(1);
+        tabRef?.current?.click();
       } catch (e) {
         Swal.fire(
           translate("Simulate", profile.translate),
@@ -758,8 +765,9 @@ export function CreateEditSimulation(props) {
                       input.outputItems[key].type === input.outputType &&
                       input.outputItems[key].checked
                   )
-                  .map((key) => (
+                  .map((key, index) => (
                     <Tab
+                      ref={index === 0 ? tabRef : null}
                       label={translate(
                         input.outputItems[key].label,
                         profile.language
