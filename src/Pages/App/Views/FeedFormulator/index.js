@@ -25,6 +25,9 @@ export function FeedFormulator(props) {
     ingredientsDefault: true,
     customer: "",
     aminoacid: "",
+    simulation: "",
+    start: "",
+    end: "",
     diet: "",
     applyEnergy: false,
   });
@@ -48,6 +51,8 @@ export function FeedFormulator(props) {
   const [loadingFormulate, setLoadingFormulate] = useState(false);
 
   const [loadingSave, setLoadingSave] = useState(false);
+
+  const [simulations, setSimulations] = useState([]);
 
   const [response, setResponse] = useState({
     errors: [0],
@@ -161,6 +166,128 @@ export function FeedFormulator(props) {
     }
   };
 
+  const energyHandler = async () => {
+    const simToNutr = {
+      LysDiet1: {
+        nome: "Digestible Lysine (%)",
+        nomeDB: "lisinaDig",
+        _id: "lisinaDig",
+        tipo: "a",
+      },
+      MetDiet1: {
+        nome: "Digestible Methionine (%)",
+        nomeDB: "metioninaDig",
+        _id: "metioninaDig",
+        tipo: "a",
+      },
+      MetCysDiet1: {
+        nome: "Digestible Met + Cys (%)",
+        nomeDB: "metCisDig",
+        _id: "metCisDig",
+        tipo: "a",
+      },
+      ThrDiet1: {
+        nome: "Digestible Treonine (%)",
+        nomeDB: "treoninaDig",
+        _id: "treoninaDig",
+        tipo: "a",
+      },
+      TrpDiet1: {
+        nome: "Digestible Tryptophan (%)",
+        nomeDB: "triptofanoDig",
+        _id: "triptofanoDig",
+        tipo: "a",
+      },
+      IleDiet1: {
+        nome: "Digestible Isoleucine (%)",
+        nomeDB: "isoleucinaDig",
+        _id: "isoleucinaDig",
+        tipo: "a",
+      },
+      LeuDiet1: {
+        nome: "Digestible Leucine (%)",
+        nomeDB: "leucinaDig",
+        _id: "leucinaDig",
+        tipo: "a",
+      },
+      ValDiet1: {
+        nome: "Digestible Valine (%)",
+        nomeDB: "valinaDig",
+        _id: "valinaDig",
+        tipo: "a",
+      },
+      PheTyrDiet1: {
+        nome: "Digestible Phen +Tyr (%)",
+        nomeDB: "fenTirDig",
+        _id: "fenTirDig",
+        tipo: "a",
+      },
+      HisDiet1: {
+        nome: "Digestible Histidine (%)",
+        nomeDB: "histidinaDig",
+        _id: "histidinaDig",
+        tipo: "a",
+      },
+      ArgDiet1: {
+        nome: "Digestible Arginine (%)",
+        nomeDB: "argininaDig",
+        _id: "argininaDig",
+        tipo: "a",
+      },
+      ATTD_Ca_req_Porc: {
+        nome: "Calcium (%)",
+        nomeDB: "ca",
+        _id: "ca",
+        tipo: "c",
+      },
+      ATTD_P_req_Porc: {
+        nome: "Available Phosphorus (%)",
+        nomeDB: "pDisp",
+        _id: "pDisp",
+        tipo: "c",
+      },
+      EnergyRequiredDiet: {
+        nome: "Met. Energia (Kcal/kg)",
+        nomeDB: "energiaMetAves",
+        _id: "energiaMetAves",
+        tipo: "c",
+      },
+    };
+    const response = await api.get("simulation/" + filter.simulation);
+    const { individuo } = response.data.response;
+    const media = {};
+    for (let item in simToNutr) {
+      media[simToNutr[item]._id] = 0;
+    }
+    individuo.forEach(function (item) {
+      if (item.age >= filter.start && item.age <= filter.end) {
+        for (let obj in simToNutr) {
+          media[simToNutr[obj]._id] +=
+            obj === "EnergyRequiredDiet"
+              ? ((item[obj] * 1000) / 4.184) * 0.85
+              : item[obj];
+        }
+      }
+    });
+    setInput((prevState) => {
+      const newState = JSON.parse(JSON.stringify(prevState));
+      newState.selectedNutrients = [];
+      return newState;
+    });
+    for (let item in simToNutr) {
+      const value =
+        media[simToNutr[item]._id] / (filter.end - filter.start + 1);
+      const obj = simToNutr[item];
+      obj.min = value.toFixed(item === "EnergyRequiredDiet" ? 0 : 3);
+      obj.max = (value * 1.3).toFixed(item === "EnergyRequiredDiet" ? 0 : 3);
+      setInput((prevState) => {
+        const newState = JSON.parse(JSON.stringify(prevState));
+        newState.selectedNutrients.push(obj);
+        return newState;
+      });
+    }
+  };
+
   useEffect(() => {
     const getInitData = async () => {
       try {
@@ -180,6 +307,12 @@ export function FeedFormulator(props) {
             formula,
           }))
         );
+        const responseSimulations = await api.post("filter/list", {
+          model: "simulation",
+          sort: "nome",
+          select: "nome customer",
+        });
+        setSimulations(responseSimulations.data);
         setLoading(false);
       } catch (e) {
         Swal.fire(
@@ -361,7 +494,9 @@ export function FeedFormulator(props) {
                   nutrients={nutrients}
                   input={input}
                   setInput={setInput}
+                  simulations={simulations}
                   error={error}
+                  energyHandler={energyHandler}
                 />
               )}
               {tab === 2 && (

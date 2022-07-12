@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../../../../../Components/Button";
 import { FontAwesome } from "../../../../../Components/FontAwesome";
 import { Input } from "../../../../../Components/Input";
 import {
@@ -15,11 +16,11 @@ export function Nutrients({
   filter,
   setFilter,
   profile,
-  diets,
-  customers,
+  simulations,
   nutrients,
   input,
   setInput,
+  energyHandler,
 }) {
   const addNutrient = (nutrient) => {
     setInput((prevState) => {
@@ -69,16 +70,93 @@ export function Nutrients({
             />
           )}
         </Col>
-        <Col style={{ paddingTop: 28 }}>
-          <Input
-            type="checkbox"
-            label={translate(`Check this option to apply the energy, 
+        <Col style={{ flexDirection: "row", gap: 10 }}>
+          <div style={{ marginTop: 28 }}>
+            <Input
+              type="checkbox"
+              label={
+                filter.applyEnergy
+                  ? ""
+                  : translate(`Check this option to apply the energy, 
             amino acid, Ca and avP estimated in a simulation previously saved, 
-            profile.language`)}
-            item={filter}
-            setItem={setFilter}
-            params="applyEnergy"
-          />
+            profile.language`)
+              }
+              item={filter}
+              setItem={setFilter}
+              params="applyEnergy"
+            />
+          </div>
+          {filter.applyEnergy ? (
+            <>
+              <Input
+                type="select"
+                label={translate("Simulation", profile.language)}
+                placeholder={translate("Select Simulation", profile.language)}
+                item={filter}
+                setItem={setFilter}
+                params="simulation"
+                options={simulations
+                  .filter(({ customer }) =>
+                    filter.customer
+                      ? customer === filter.customer || !customer
+                      : true
+                  )
+                  .map(({ _id, nome }) => ({
+                    value: _id,
+                    label: nome,
+                  }))}
+              />
+              <Input
+                type="input"
+                inputType="number"
+                label={translate("Start", profile.language)}
+                placeholder={translate("Day", profile.language)}
+                item={filter}
+                setItem={setFilter}
+                params="start"
+              />
+              <Input
+                type="input"
+                inputType="number"
+                label={translate("End", profile.language)}
+                placeholder={translate("Day", profile.language)}
+                item={filter}
+                setItem={setFilter}
+                params="end"
+              />
+              <Button
+                notFull={true}
+                style={{ height: 38, width: 38, marginTop: 21 }}
+                color="white"
+                border="default"
+                bg="default"
+                onClick={energyHandler}
+                disabled={!filter.end || !filter.start || !filter.simulation}
+              >
+                <FontAwesome
+                  name="arrow-down"
+                  type="solid"
+                  size={14}
+                  color="white"
+                />
+              </Button>
+              <Button
+                notFull={true}
+                style={{ height: 38, width: 38, marginTop: 21 }}
+                color="white"
+                border="danger"
+                bg="danger"
+                onClick={() => setInput({ ...input, selectedNutrients: [] })}
+              >
+                <FontAwesome
+                  name="trash"
+                  type="solid"
+                  size={14}
+                  color="white"
+                />
+              </Button>
+            </>
+          ) : null}
         </Col>
       </Row>
       <Row>
