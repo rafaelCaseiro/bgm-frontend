@@ -28,7 +28,7 @@ export function NutritionalRequirement({ profile, response }) {
           {response?.nutritionalRequirement?.map(
             ({ nome, min, max, difMin, difMax, value }) => (
               <tr>
-                <Td>{nome}</Td>
+                <Td>{translate(nome, profile.language)}</Td>
                 <Td>{convertNumberToString(value, 3)}</Td>
                 <Td>{convertNumberToString(min, 3)}</Td>
                 <Td>{convertNumberToString(max, 3)}</Td>

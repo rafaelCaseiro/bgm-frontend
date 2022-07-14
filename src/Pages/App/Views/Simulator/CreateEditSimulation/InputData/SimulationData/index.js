@@ -25,7 +25,10 @@ export function SimulationData({
             item={input}
             setItem={setInput}
             params="animalProfile"
-            placeholder="Select the Animal Profile"
+            placeholder={translate(
+              "Select the Animal Profile",
+              profile.language
+            )}
             required={true}
             options={animalProfiles
               .filter(({ customer }) =>
@@ -41,7 +44,10 @@ export function SimulationData({
             item={input}
             setItem={setInput}
             params="feedRestrictionProgram"
-            placeholder="Select the Feed Restriction Program"
+            placeholder={translate(
+              "Select the Feed Restriction Program",
+              profile.language
+            )}
             options={feedRestrictionPrograms
               .filter(({ customer }) =>
                 input.customer ? customer === input.customer || !customer : true
@@ -56,7 +62,7 @@ export function SimulationData({
             item={input}
             setItem={setInput}
             params="environment"
-            placeholder="Select the Environment"
+            placeholder={translate("Select the Environment", profile.language)}
             required={true}
             options={environmentVariables
               .filter(({ customer }) =>
@@ -88,8 +94,11 @@ export function SimulationData({
             params="condition"
             required={true}
             options={[
-              { value: "age", label: "Age (d)" },
-              { value: "weight", label: "Weight (g)" },
+              { value: "age", label: translate("Age (d)", profile.language) },
+              {
+                value: "weight",
+                label: translate("Weight (g)", profile.language),
+              },
             ]}
           />
         </Col>
@@ -113,9 +122,12 @@ export function SimulationData({
             item={input}
             setItem={setInput}
             params="start"
-            placeholder={`Initial ${
-              input.condition === "age" ? "Age (d)" : "Weight (g)"
-            }`}
+            placeholder={translate(
+              input.condition === "age"
+                ? "Initial Age (d)"
+                : "Initial Weight (g)",
+              profile.language
+            )}
             required={true}
           />
         </Col>
@@ -127,9 +139,10 @@ export function SimulationData({
             item={input}
             setItem={setInput}
             params="end"
-            placeholder={`Final ${
-              input.condition === "age" ? "Age (d)" : "Weight (g)"
-            }`}
+            placeholder={translate(
+              input.condition === "age" ? "Final Age (d)" : "Final Weight (g)",
+              profile.language
+            )}
             required={true}
           />
         </Col>

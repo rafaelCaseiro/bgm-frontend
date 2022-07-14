@@ -91,8 +91,8 @@ export function FeedFormulator(props) {
             price: true,
           });
           return Swal.fire(
-            translate("Formulate Diet", profile.translate),
-            translate("Fill in the required data", profile.translate),
+            translate("Formulate Diet", profile.language),
+            translate("Fill in the required data", profile.language),
             "error"
           );
         }
@@ -103,8 +103,8 @@ export function FeedFormulator(props) {
       setTab(2);
     } catch (e) {
       Swal.fire(
-        translate("Formulate Diet", profile.translate),
-        translate("Error Formulating Diet", profile.translate),
+        translate("Formulate Diet", profile.language),
+        translate("Error Formulating Diet", profile.language),
         "error"
       );
       setLoadingFormulate(false);
@@ -131,16 +131,16 @@ export function FeedFormulator(props) {
         query.customer = customer;
       }
       const responseDiet = await Swal.fire({
-        title: translate("Create Diet", profile.translate),
+        title: translate("Create Diet", profile.language),
         text: translate(
           "Do you want to confirm Diet creation",
-          profile.translate
+          profile.language
         ),
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#0451e8",
         cancelButtonColor: "#d33",
-        confirmButtonText: translate("Yes, Create Diet!", profile.translate),
+        confirmButtonText: translate("Yes, Create Diet!", profile.language),
         showLoaderOnConfirm: true,
         preConfirm: async () =>
           await api.post("diet", query).catch((err) => ({
@@ -149,8 +149,8 @@ export function FeedFormulator(props) {
           })),
       });
       Swal.fire(
-        translate("Create Diet", profile.translate),
-        translate(responseDiet.value.data.message, profile.translate),
+        translate("Create Diet", profile.language),
+        translate(responseDiet.value.data.message, profile.language),
         responseDiet.value.err ? "error" : "success"
       );
       setDietName("");
@@ -158,8 +158,8 @@ export function FeedFormulator(props) {
       setGetInit(true);
     } catch (e) {
       Swal.fire(
-        translate("Save Diet", profile.translate),
-        translate("Error saving Diet", profile.translate),
+        translate("Save Diet", profile.language),
+        translate("Error saving Diet", profile.language),
         "error"
       );
       setLoadingSave(false);
@@ -316,8 +316,8 @@ export function FeedFormulator(props) {
         setLoading(false);
       } catch (e) {
         Swal.fire(
-          translate("Load Data", profile.translate),
-          translate("Error loading Diet", profile.translate),
+          translate("Load Data", profile.language),
+          translate("Error loading Diet", profile.language),
           "error"
         );
         setLoading(false);
@@ -327,7 +327,7 @@ export function FeedFormulator(props) {
       setGetInit(false);
       getInitData();
     }
-  }, [getInit, profile.translate]);
+  }, [getInit, profile.language]);
 
   return (
     <>
@@ -348,7 +348,7 @@ export function FeedFormulator(props) {
       />
       <Block className="animate__animated animate__fadeInUp">
         <BlockHeader>
-          {translate("Fill in diet data", profile.translate)}
+          {translate("Fill in diet data", profile.language)}
           <div>
             {response.formula && (
               <SaveForm onSubmit={saveDiet}>

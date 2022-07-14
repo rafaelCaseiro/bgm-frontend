@@ -260,7 +260,7 @@ export function Table({
                         filter={filter}
                         onClick={filter ? () => dropdownHandler(index) : null}
                       >
-                        {translate(label, profile.language)}{" "}
+                        {label}{" "}
                         {filter && <ArrowIcon show={showDropdown[index]} />}{" "}
                         {params.sort ===
                           `${key}${rest.params ? `.${rest.params}` : ""}` && (
@@ -430,11 +430,13 @@ export function Table({
               }
             />
             <TotalItems>
-              Mostrando {+params.page * +params.limit - +params.limit - 1} a{" "}
+              {translate("Showing", profile.language)}{" "}
+              {+params.page * +params.limit - +params.limit + 1}{" "}
+              {translate("to", profile.language)}{" "}
               {totalItems > +params.page * +params.limit
                 ? +params.page * +params.limit
                 : totalItems}{" "}
-              de {totalItems}
+              {translate("of", profile.language)} {totalItems}
             </TotalItems>
           </BottomContent>
         </Container>

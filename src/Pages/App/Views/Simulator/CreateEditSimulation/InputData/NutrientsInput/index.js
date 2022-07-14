@@ -151,7 +151,7 @@ export function NutrientsInput({
       <Body>
         {nutrients.map(({ label, key }) => (
           <tr>
-            <Td>{label}</Td>
+            <Td>{translate(label, profile.language)}</Td>
             {input.diet.map((item, index) => (
               <Td>
                 <InputTable
@@ -160,7 +160,10 @@ export function NutrientsInput({
                   item={input}
                   setItem={setInput}
                   params={`diet.${index}.${key}`}
-                  placeholder={translate(`Type the ${label}`, profile.language)}
+                  placeholder={
+                    translate(`Type the value of `, profile.language) +
+                    translate(label, profile.language)
+                  }
                 />
               </Td>
             ))}

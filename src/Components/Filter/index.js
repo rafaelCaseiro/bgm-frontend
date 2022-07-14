@@ -8,7 +8,7 @@ import startOfDay from "date-fns/startOfDay";
 import Slider from "@material-ui/core/Slider";
 import { Sort } from "../Table/style";
 import { DateRange } from "react-date-range";
-import { ptBR } from "react-date-range/dist/locale";
+import { ptBR, enUS, es } from "react-date-range/dist/locale";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getRoutePath, translate } from "../../utils/globalFunctions";
 import Profile from "../../contexts/profile";
@@ -204,7 +204,13 @@ export function Filter({
               onChange={(item) => setDateRange([item.selection])}
               moveRangeOnFirstSelection={false}
               ranges={dateRange}
-              locale={ptBR}
+              locale={
+                profile.language === "pt"
+                  ? ptBR
+                  : profile.language === "es"
+                  ? es
+                  : enUS
+              }
               endDatePlaceholder="Até"
               startDatePlaceholder="De"
               dateDisplayFormat="dd/MM/yyyy"
@@ -278,15 +284,16 @@ export function Filter({
 
   return (
     <Container>
-      <h3>Ordenar</h3>
+      <h3>{translate("Sort", profile.language)}</h3>
       <Sort onClick={() => sort(`${colKey}${colParams ? `.${params}` : ""}`)}>
-        Crescente
+        {translate("Ascending", profile.language)}
         <Icons type="asc" color="var(--default)" size={15} />
       </Sort>
       <Sort onClick={() => sort(`-${colKey}${colParams ? `.${params}` : ""}`)}>
-        Decrescente <Icons type="desc" color="var(--default)" size={15} />
+        {translate("Descending", profile.language)}{" "}
+        <Icons type="desc" color="var(--default)" size={15} />
       </Sort>
-      <h3>Filtrar</h3>
+      <h3>{translate("Filter", profile.language)}</h3>
       {getFilterType()}
     </Container>
   );

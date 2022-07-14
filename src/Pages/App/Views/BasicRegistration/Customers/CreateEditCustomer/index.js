@@ -41,78 +41,73 @@ export function CreateEditCustomer(props) {
 
   const [getCustomer, setGetCustomer] = useState(true);
 
-  const saveCustomer = useCallback(
-    async (e) => {
-      e.preventDefault();
+  const saveCustomer = async (e) => {
+    e.preventDefault();
 
-      if (!params.id) {
-        const response = await Swal.fire({
-          title: translate("Create Customer", profile.translate),
-          text: translate(
-            "Do you want to confirm customer creation",
-            profile.translate
-          ),
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#0451e8",
-          cancelButtonColor: "#d33",
-          confirmButtonText: translate(
-            "Yes, Create Customer!",
-            profile.translate
-          ),
-          showLoaderOnConfirm: true,
-          preConfirm: async () =>
-            await api.post("customer", customer).catch((err) => ({
-              err: true,
-              data: { message: err.response.data.message },
-            })),
-        });
-        if (response.value) {
-          if (response.value.err) {
-            return navigate("/404");
-          }
-          Swal.fire(
-            translate("Create Customer", profile.translate),
-            response.value.data.message,
-            response.value.err ? "error" : "success"
-          );
-          navigate(
-            "/basicregistration/customer/edit/" + response.value.data.id,
-            { replace: true }
-          );
-          setGetCustomer(true);
+    if (!params.id) {
+      const response = await Swal.fire({
+        title: translate("Create Customer", profile.language),
+        text: translate(
+          "Do you want to confirm customer creation?",
+          profile.language
+        ),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0451e8",
+        cancelButtonColor: "#d33",
+        cancelButtonText: translate("Cancel", profile.language),
+        confirmButtonText: translate("Yes, Create Customer", profile.language),
+        showLoaderOnConfirm: true,
+        preConfirm: async () =>
+          await api.post("customer", customer).catch((err) => ({
+            err: true,
+            data: { message: err.response.data.message },
+          })),
+      });
+      if (response.value) {
+        if (response.value.err) {
+          return navigate("/404");
         }
-      } else {
-        const response = await Swal.fire({
-          title: translate("Edit Customer", profile.translate),
-          text: translate(
-            "Do you want to confirm customer edit",
-            profile.translate
-          ),
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#0451e8",
-          cancelButtonColor: "#d33",
-          confirmButtonText: translate("Yes, Edit Customer", profile.translate),
-          showLoaderOnConfirm: true,
-          preConfirm: async () =>
-            await api.put("customer/" + params.id, customer).catch((err) => ({
-              err: true,
-              data: { message: err.response.data.message },
-            })),
+        Swal.fire(
+          translate("Create Customer", profile.language),
+          response.value.data.message,
+          response.value.err ? "error" : "success"
+        );
+        navigate("/basicregistration/customer/edit/" + response.value.data.id, {
+          replace: true,
         });
-        if (response.value) {
-          Swal.fire(
-            translate("Edit Customer", profile.translate),
-            response.value.data.message,
-            response.value.err ? "error" : "success"
-          );
-          setGetCustomer(true);
-        }
+        setGetCustomer(true);
       }
-    },
-    [params, customer, navigate, profile]
-  );
+    } else {
+      const response = await Swal.fire({
+        title: translate("Edit Customer", profile.language),
+        text: translate(
+          "Do you want to confirm customer edit?",
+          profile.language
+        ),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#0451e8",
+        cancelButtonColor: "#d33",
+        cancelButtonText: translate("Cancel", profile.language),
+        confirmButtonText: translate("Yes, Edit Customer", profile.language),
+        showLoaderOnConfirm: true,
+        preConfirm: async () =>
+          await api.put("customer/" + params.id, customer).catch((err) => ({
+            err: true,
+            data: { message: err.response.data.message },
+          })),
+      });
+      if (response.value) {
+        Swal.fire(
+          translate("Edit Customer", profile.language),
+          response.value.data.message,
+          response.value.err ? "error" : "success"
+        );
+        setGetCustomer(true);
+      }
+    }
+  };
 
   useEffect(() => {
     const loadCustomer = async () => {
@@ -161,7 +156,7 @@ export function CreateEditCustomer(props) {
       />
       <Block className="animate__animated animate__fadeInUp">
         <BlockHeader>
-          {translate("Fill in Customer data", profile.translate)}
+          {translate("Fill in Customer data", profile.language)}
           <Input
             type="switch"
             item={customer}

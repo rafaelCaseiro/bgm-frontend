@@ -484,8 +484,8 @@ export function CreateEditSimulation(props) {
       if (!input.nome) {
         setLoadingSave(false);
         return Swal.fire(
-          translate("Error", profile.translate),
-          translate("Type the simulation name", profile.translate),
+          translate("Error", profile.language),
+          translate("Type the simulation name", profile.language),
           "error"
         );
       }
@@ -495,18 +495,20 @@ export function CreateEditSimulation(props) {
       query.response = response;
       if (params.id) {
         const responseSimulation = await Swal.fire({
-          title: translate("Edit Simulation", profile.translate),
+          title: translate("Edit Simulation", profile.language),
           text: translate(
-            "Do you want to confirm Simulation save",
-            profile.translate
+            "Do you want to confirm Simulation edit?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
+
           confirmButtonText: translate(
-            "Yes, Edit Simulation!",
-            profile.translate
+            "Yes, Edit Simulation",
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -515,26 +517,30 @@ export function CreateEditSimulation(props) {
               data: { message: err.response.data.message },
             })),
         });
+        if (response.value) {
+          Swal.fire(
+            translate("Edit Simulation", profile.language),
+            translate(responseSimulation.value.data.message, profile.language),
+            responseSimulation.value.err ? "error" : "success"
+          );
 
-        Swal.fire(
-          translate("Edit Simulation", profile.translate),
-          translate(responseSimulation.value.data.message, profile.translate),
-          responseSimulation.value.err ? "error" : "success"
-        );
+          setGetData(true);
+        }
       } else {
         const responseSimulation = await Swal.fire({
-          title: translate("Create Simulation", profile.translate),
+          title: translate("Create Simulation", profile.language),
           text: translate(
-            "Do you want to confirm Simulation creation",
-            profile.translate
+            "Do you want to confirm Simulation creation?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
-            "Yes, Create Simulation!",
-            profile.translate
+            "Yes, Create Simulation",
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -544,26 +550,28 @@ export function CreateEditSimulation(props) {
             })),
         });
 
-        Swal.fire(
-          translate("Create Simulation", profile.translate),
-          translate(responseSimulation.value.data.message, profile.translate),
-          responseSimulation.value.err ? "error" : "success"
-        );
-        navigate(
-          "/simulator/simulation/edit/" + responseSimulation.value.data.id,
-          {
-            replace: true,
-          }
-        );
-      }
+        if (responseSimulation.value) {
+          Swal.fire(
+            translate("Create Simulation", profile.language),
+            translate(responseSimulation.value.data.message, profile.language),
+            responseSimulation.value.err ? "error" : "success"
+          );
+          navigate(
+            "/simulator/simulation/edit/" + responseSimulation.value.data.id,
+            {
+              replace: true,
+            }
+          );
 
+          setGetData(true);
+        }
+      }
       setLoadingSave(false);
-      setGetData(true);
     } catch (e) {
       console.log(e);
       Swal.fire(
-        translate("Save Simulation", profile.translate),
-        translate("Error saving Simulation", profile.translate),
+        translate("Save Simulation", profile.language),
+        translate("Error saving Simulation", profile.language),
         "error"
       );
       setLoadingSave(false);
@@ -597,13 +605,13 @@ export function CreateEditSimulation(props) {
         tabRef?.current?.click();
       } catch (e) {
         Swal.fire(
-          translate("Simulate", profile.translate),
-          translate(e.message, profile.translate),
+          translate("Simulate", profile.language),
+          translate(e.message, profile.language),
           "error"
         );
       }
     },
-    [profile.translate]
+    [profile.language]
   );
 
   useEffect(() => {

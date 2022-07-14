@@ -23,7 +23,7 @@ export function Composition({ profile, diet }) {
         <Body>
           {diet.composicao?.map(({ nome, valor }) => (
             <tr>
-              <Td>{nome}</Td>
+              <Td>{translate(nome, profile.language)}</Td>
               <Td>{convertNumberToString(valor, 3)}</Td>
             </tr>
           ))}

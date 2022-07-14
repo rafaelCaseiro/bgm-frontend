@@ -16,14 +16,14 @@ const tableParams = [
     key: "nome",
     label: "Name",
     filter: "text",
-    placeholder: "type the Name",
+    placeholder: "Type the Name",
   },
   {
     key: "customer",
     label: "Cliente",
     filter: "text",
     params: "name",
-    placeholder: "type the Name",
+    placeholder: "Type the Customer",
   },
   {
     key: "status",

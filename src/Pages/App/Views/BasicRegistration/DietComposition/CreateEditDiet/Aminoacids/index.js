@@ -23,7 +23,7 @@ export function Aminoacids({ profile, diet }) {
         <Body>
           {diet.aminoacidos?.map(({ nome, valor }) => (
             <tr>
-              <Td>{nome}</Td>
+              <Td>{translate(nome, profile.language)}</Td>
               <Td>{convertNumberToString(valor, 3)}</Td>
             </tr>
           ))}

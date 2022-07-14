@@ -89,18 +89,19 @@ export function CreateEditDietProgram(props) {
 
       if (!params.id) {
         const response = await Swal.fire({
-          title: translate("Create Diet Program", profile.translate),
+          title: translate("Create Diet Program", profile.language),
           text: translate(
-            "Do you want to confirm Diet Program creation",
-            profile.translate
+            "Do you want to confirm Diet Program creation?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
-            "Yes, Create Diet Program!",
-            profile.translate
+            "Yes, Create Diet Program",
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -112,13 +113,13 @@ export function CreateEditDietProgram(props) {
         if (response.value) {
           if (response.value.err) {
             return Swal.fire(
-              translate("Save Diet Program", profile.translate),
-              translate("Error saving Diet Program", profile.translate),
+              translate("Save Diet Program", profile.language),
+              translate("Error saving Diet Program", profile.language),
               "error"
             );
           }
           Swal.fire(
-            translate("Create Diet Program", profile.translate),
+            translate("Create Diet Program", profile.language),
             response.value.data.message,
             response.value.err ? "error" : "success"
           );
@@ -132,18 +133,19 @@ export function CreateEditDietProgram(props) {
         }
       } else {
         const response = await Swal.fire({
-          title: translate("Edit Diet Program", profile.translate),
+          title: translate("Edit Diet Program", profile.language),
           text: translate(
-            "Do you want to confirm Diet Program edit",
-            profile.translate
+            "Do you want to confirm Diet Program edit?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
             "Yes, Edit Diet Program",
-            profile.translate
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -154,7 +156,7 @@ export function CreateEditDietProgram(props) {
         });
         if (response.value) {
           Swal.fire(
-            translate("Edit Diet Program", profile.translate),
+            translate("Edit Diet Program", profile.language),
             response.value.data.message,
             response.value.err ? "error" : "success"
           );
@@ -163,8 +165,8 @@ export function CreateEditDietProgram(props) {
       }
     } catch (e) {
       Swal.fire(
-        translate("Edit Diet Program", profile.translate),
-        translate("Error saving Diet Program", profile.translate),
+        translate("Edit Diet Program", profile.language),
+        translate("Error saving Diet Program", profile.language),
         "error"
       );
       setGetDietProgram(true);
@@ -185,8 +187,8 @@ export function CreateEditDietProgram(props) {
           .catch(() => ({ data: false }));
         if (!responseDietProgram.data) {
           return Swal.fire(
-            translate("Edit Diet Program", profile.translate),
-            translate("Error to search DietPrograms", profile.translate),
+            translate("Edit Diet Program", profile.language),
+            translate("Error to search DietPrograms", profile.language),
             "error"
           );
         }
@@ -208,7 +210,7 @@ export function CreateEditDietProgram(props) {
         breadcrumbs={[
           { label: translate("Basic Registration", profile.language) },
           {
-            label: translate("Diet Programs List", profile.language),
+            label: translate("Diet Program List", profile.language),
             to: "/basicregistration/dietprogram/1/30/index/{}",
           },
           {
@@ -222,7 +224,7 @@ export function CreateEditDietProgram(props) {
       />
       <Block className="animate__animated animate__fadeInUp">
         <BlockHeader>
-          {translate("Fill in Diet Program data", profile.translate)}
+          {translate("Fill in Diet Program data", profile.language)}
           <Input
             type="switch"
             item={dietProgram}

@@ -93,18 +93,19 @@ export function CreateEditEnvironmentVariables(props) {
 
       if (!params.id) {
         const response = await Swal.fire({
-          title: translate("Create Environment Variables", profile.translate),
+          title: translate("Create Environment Variables", profile.language),
           text: translate(
-            "Do you want to confirm Environment Variables creation",
-            profile.translate
+            "Do you want to confirm Environment Variables creation?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
-            "Yes, Create Environment Variables!",
-            profile.translate
+            "Yes, Create Environment Variables",
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -116,16 +117,13 @@ export function CreateEditEnvironmentVariables(props) {
         if (response.value) {
           if (response.value.err) {
             return Swal.fire(
-              translate("Save Environment Variables", profile.translate),
-              translate(
-                "Error saving Environment Variables",
-                profile.translate
-              ),
+              translate("Save Environment Variables", profile.language),
+              translate("Error saving Environment Variables", profile.language),
               "error"
             );
           }
           Swal.fire(
-            translate("Create Environment Variables", profile.translate),
+            translate("Create Environment Variables", profile.language),
             response.value.data.message,
             response.value.err ? "error" : "success"
           );
@@ -140,18 +138,19 @@ export function CreateEditEnvironmentVariables(props) {
         }
       } else {
         const response = await Swal.fire({
-          title: translate("Edit Environment Variables", profile.translate),
+          title: translate("Edit Environment Variables", profile.language),
           text: translate(
-            "Do you want to confirm Environment Variables edit",
-            profile.translate
+            "Do you want to confirm Environment Variables edit?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
             "Yes, Edit Environment Variables",
-            profile.translate
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -164,7 +163,7 @@ export function CreateEditEnvironmentVariables(props) {
         });
         if (response.value) {
           Swal.fire(
-            translate("Edit Environment Variables", profile.translate),
+            translate("Edit Environment Variables", profile.language),
             response.value.data.message,
             response.value.err ? "error" : "success"
           );
@@ -173,8 +172,8 @@ export function CreateEditEnvironmentVariables(props) {
       }
     } catch (e) {
       Swal.fire(
-        translate("Edit Environment Variables", profile.translate),
-        translate("Error saving Environment Variables", profile.translate),
+        translate("Edit Environment Variables", profile.language),
+        translate("Error saving Environment Variables", profile.language),
         "error"
       );
       setGetEnvironmentVariables(true);
@@ -189,11 +188,8 @@ export function CreateEditEnvironmentVariables(props) {
           .catch(() => ({ data: false }));
         if (!responseEnvironmentVariables.data) {
           return Swal.fire(
-            translate("Edit Environment Variables", profile.translate),
-            translate(
-              "Error to search EnvironmentVariabless",
-              profile.translate
-            ),
+            translate("Edit Environment Variables", profile.language),
+            translate("Error to search EnvironmentVariables", profile.language),
             "error"
           );
         }
@@ -215,7 +211,7 @@ export function CreateEditEnvironmentVariables(props) {
         breadcrumbs={[
           { label: translate("Basic Registration", profile.language) },
           {
-            label: translate("Environment Variabless List", profile.language),
+            label: translate("Environment Variables List", profile.language),
             to: "/basicregistration/environmentvariables/1/30/index/{}",
           },
           {
@@ -236,7 +232,7 @@ export function CreateEditEnvironmentVariables(props) {
       />
       <Block className="animate__animated animate__fadeInUp">
         <BlockHeader>
-          {translate("Fill in Environment Variables data", profile.translate)}
+          {translate("Fill in Environment Variables data", profile.language)}
           <Input
             type="switch"
             item={environmentVariables}

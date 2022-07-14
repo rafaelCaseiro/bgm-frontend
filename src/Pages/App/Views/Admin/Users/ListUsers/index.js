@@ -11,7 +11,7 @@ export function ListUsers(props) {
       key: "name",
       label: "Name",
       filter: "text",
-      placeholder: "type the Name",
+      placeholder: "Type the Name",
       mobile: {
         type: "title",
       },
@@ -20,7 +20,7 @@ export function ListUsers(props) {
       key: "username",
       label: "E-mail",
       filter: "text",
-      placeholder: "type the E-mail",
+      placeholder: "Type the E-mail",
       mobile: {
         type: "small",
       },
@@ -30,7 +30,7 @@ export function ListUsers(props) {
       key: "responsibility",
       label: "Responsibility",
       filter: "text",
-      placeholder: "type the Responsibility",
+      placeholder: "Type the Responsibility",
       mobile: {
         type: "small",
       },

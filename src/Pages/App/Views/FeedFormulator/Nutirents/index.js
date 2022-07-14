@@ -77,9 +77,10 @@ export function Nutrients({
               label={
                 filter.applyEnergy
                   ? ""
-                  : translate(`Check this option to apply the energy, 
-            amino acid, Ca and avP estimated in a simulation previously saved, 
-            profile.language`)
+                  : translate(
+                      "Check this option to apply the energy, amino acid, Ca and avP estimated in a simulation previously saved",
+                      profile.language
+                    )
               }
               item={filter}
               setItem={setFilter}
@@ -185,7 +186,7 @@ export function Nutrients({
                   key={nomeDB}
                   onClick={() => addNutrient({ nome, nomeDB, preco })}
                 >
-                  <span>{nome}</span>
+                  <span>{translate(nome, profile.language)}</span>
                   <FontAwesome
                     style={{ marginTop: 2 }}
                     name="circle-chevron-right"
@@ -216,7 +217,9 @@ export function Nutrients({
               {input.selectedNutrients.map(({ nome, _id }, index) => (
                 <tr key={_id}>
                   <Td>
-                    <div style={{ paddingRight: 5 }}>{nome}</div>
+                    <div style={{ paddingRight: 5 }}>
+                      {translate(nome, profile.language)}
+                    </div>
                   </Td>
                   <Td>
                     <InputTable

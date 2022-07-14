@@ -236,9 +236,9 @@ export function CreateEditOptimization(props) {
           params.id ? "Edit Optimization" : "New Optimization",
           profile.language
         )}
-        route="simulator"
+        route="optimization"
         breadcrumbs={[
-          { label: translate("Simulator", profile.language) },
+          { label: translate("Optimizator", profile.language) },
           {
             label: translate(
               params.id ? "Edit Optimization" : "New Optimization",

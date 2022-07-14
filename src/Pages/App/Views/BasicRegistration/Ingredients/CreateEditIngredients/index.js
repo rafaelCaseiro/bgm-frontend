@@ -126,7 +126,7 @@ export function CreateEditIngredient(props) {
     { label: "Metabolizable Energy (Kcal/kg)", key: "energiaMetAves" },
     { label: "True Met. Energy (Kcal/kg)", key: "energiaMetVerdAves" },
     {
-      label: "Effective Enery (MJ/kg)",
+      label: "Effective Energy (MJ/kg)",
       key: "energiaEfetivaAves",
       calc: true,
       value:
@@ -153,10 +153,10 @@ export function CreateEditIngredient(props) {
         (ingredient.composicao.gordura * ingredient.composicao.coefDigGordura) /
         100,
     },
-    { label: "Organic Matter (MO) (%)", key: "materiaOrganica" },
+    { label: "Organic Matter (OM) (%)", key: "materiaOrganica" },
     { label: "Mineral (%)", key: "materiaMineral" },
     { label: "Potassium (%)", key: "potassio" },
-    { label: "Sodum (%)", key: "sodio" },
+    { label: "Sodium (%)", key: "sodio" },
     { label: "Chloride (%)", key: "cloro" },
     {
       label: "Eletrolitic Balance (mEq/kg)",
@@ -173,7 +173,7 @@ export function CreateEditIngredient(props) {
             : 0) || 0,
       calc: true,
     },
-    { label: "total Phosphorus (%)", key: "pTotal" },
+    { label: "Total Phosphorus (%)", key: "pTotal" },
     { label: "Available Phosphorus (%)", key: "pDisp" },
     { label: "Calcium (%)", key: "ca" },
   ];
@@ -208,18 +208,19 @@ export function CreateEditIngredient(props) {
 
       if (!params.id) {
         const response = await Swal.fire({
-          title: translate("Create Ingredient", profile.translate),
+          title: translate("Create Ingredient", profile.language),
           text: translate(
-            "Do you want to confirm ingredient creation",
-            profile.translate
+            "Do you want to confirm ingredient creation?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
-            "Yes, Create Ingredient!",
-            profile.translate
+            "Yes, Create Ingredient",
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -231,13 +232,13 @@ export function CreateEditIngredient(props) {
         if (response.value) {
           if (response.value.err) {
             return Swal.fire(
-              translate("Save Ingredient", profile.translate),
-              translate("Error saving Ingredient", profile.translate),
+              translate("Save Ingredient", profile.language),
+              translate("Error saving Ingredient", profile.language),
               "error"
             );
           }
           Swal.fire(
-            translate("Create Ingredient", profile.translate),
+            translate("Create Ingredient", profile.language),
             response.value.data.message,
             response.value.err ? "error" : "success"
           );
@@ -251,18 +252,19 @@ export function CreateEditIngredient(props) {
         }
       } else {
         const response = await Swal.fire({
-          title: translate("Edit Ingredient", profile.translate),
+          title: translate("Edit Ingredient", profile.language),
           text: translate(
-            "Do you want to confirm ingredient edit",
-            profile.translate
+            "Do you want to confirm ingredient edit?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
             "Yes, Edit Ingredient",
-            profile.translate
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -273,7 +275,7 @@ export function CreateEditIngredient(props) {
         });
         if (response.value) {
           Swal.fire(
-            translate("Edit Ingredient", profile.translate),
+            translate("Edit Ingredient", profile.language),
             response.value.data.message,
             response.value.err ? "error" : "success"
           );
@@ -282,8 +284,8 @@ export function CreateEditIngredient(props) {
       }
     } catch (e) {
       Swal.fire(
-        translate("Edit Ingredient", profile.translate),
-        translate("Error saving ingredient", profile.translate),
+        translate("Edit Ingredient", profile.language),
+        translate("Error saving ingredient", profile.language),
         "error"
       );
       setGetIngredient(true);
@@ -298,8 +300,8 @@ export function CreateEditIngredient(props) {
           .catch(() => ({ data: false }));
         if (!responseIngredient.data) {
           return Swal.fire(
-            translate("Edit Ingredient", profile.translate),
-            translate("Error to search ingredients", profile.translate),
+            translate("Edit Ingredient", profile.language),
+            translate("Error to search ingredients", profile.language),
             "error"
           );
         }
@@ -337,7 +339,7 @@ export function CreateEditIngredient(props) {
       />
       <Block className="animate__animated animate__fadeInUp">
         <BlockHeader>
-          {translate("Fill in Ingredient data", profile.translate)}
+          {translate("Fill in Ingredient data", profile.language)}
           <Input
             type="switch"
             item={ingredient}
@@ -402,7 +404,7 @@ export function CreateEditIngredient(props) {
                   <Body>
                     {elementarComposition.map(({ label, key, calc, value }) => (
                       <tr key={key}>
-                        <Td>{label}</Td>
+                        <Td>{translate(label, profile.language)}</Td>
                         <Td>
                           {calc ? (
                             <div
@@ -445,7 +447,7 @@ export function CreateEditIngredient(props) {
                   <Body>
                     {aminoacids.map(({ label, key }) => (
                       <tr>
-                        <Td>{label}</Td>
+                        <Td>{translate(label, profile.language)}</Td>
                         <Td>
                           <InputTable
                             type="inputOnly"

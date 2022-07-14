@@ -47,7 +47,7 @@ export function FeedFormulatorInput({
             label={translate("Diet Program", profile.language)}
             onChange={dietProgramHandler}
             value={input.dietProgram}
-            placeholder="Select the Diet Program"
+            placeholder={translate("Select the Diet Program", profile.language)}
             required={true}
             options={dietPrograms
               .filter(({ customer }) =>

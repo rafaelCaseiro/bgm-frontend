@@ -90,21 +90,19 @@ export function CreateEditFeedRestrictionProgram(props) {
 
       if (!params.id) {
         const response = await Swal.fire({
-          title: translate(
-            "Create Feed Restriction Program",
-            profile.translate
-          ),
+          title: translate("Create Feed Restriction Program", profile.language),
           text: translate(
-            "Do you want to confirm Feed Restriction Program creation",
-            profile.translate
+            "Do you want to confirm Feed Restriction Program creation?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
-            "Yes, Create Feed Restriction Program!",
-            profile.translate
+            "Yes, Create Feed Restriction Program",
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -116,16 +114,16 @@ export function CreateEditFeedRestrictionProgram(props) {
         if (response.value) {
           if (response.value.err) {
             return Swal.fire(
-              translate("Save Feed Restriction Program", profile.translate),
+              translate("Save Feed Restriction Program", profile.language),
               translate(
                 "Error saving Feed Restriction Program",
-                profile.translate
+                profile.language
               ),
               "error"
             );
           }
           Swal.fire(
-            translate("Create Feed Restriction Program", profile.translate),
+            translate("Create Feed Restriction Program", profile.language),
             response.value.data.message,
             response.value.err ? "error" : "success"
           );
@@ -140,18 +138,19 @@ export function CreateEditFeedRestrictionProgram(props) {
         }
       } else {
         const response = await Swal.fire({
-          title: translate("Edit Feed Restriction Program", profile.translate),
+          title: translate("Edit Feed Restriction Program", profile.language),
           text: translate(
-            "Do you want to confirm Feed Restriction Program edit",
-            profile.translate
+            "Do you want to confirm Feed Restriction Program edit?",
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
             "Yes, Edit Feed Restriction Program",
-            profile.translate
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -164,7 +163,7 @@ export function CreateEditFeedRestrictionProgram(props) {
         });
         if (response.value) {
           Swal.fire(
-            translate("Edit Feed Restriction Program", profile.translate),
+            translate("Edit Feed Restriction Program", profile.language),
             response.value.data.message,
             response.value.err ? "error" : "success"
           );
@@ -173,8 +172,8 @@ export function CreateEditFeedRestrictionProgram(props) {
       }
     } catch (e) {
       Swal.fire(
-        translate("Edit Feed Restriction Program", profile.translate),
-        translate("Error saving Feed Restriction Program", profile.translate),
+        translate("Edit Feed Restriction Program", profile.language),
+        translate("Error saving Feed Restriction Program", profile.language),
         "error"
       );
       setGetFeedRestrictionProgram(true);
@@ -189,10 +188,10 @@ export function CreateEditFeedRestrictionProgram(props) {
           .catch(() => ({ data: false }));
         if (!responseFeedRestrictionProgram.data) {
           return Swal.fire(
-            translate("Edit Feed Restriction Program", profile.translate),
+            translate("Edit Feed Restriction Program", profile.language),
             translate(
               "Error to search Feed Restriction Programs",
-              profile.translate
+              profile.language
             ),
             "error"
           );
@@ -215,10 +214,7 @@ export function CreateEditFeedRestrictionProgram(props) {
         breadcrumbs={[
           { label: translate("Basic Registration", profile.language) },
           {
-            label: translate(
-              "Feed Restriction Programs List",
-              profile.language
-            ),
+            label: translate("Feed Restriction Program List", profile.language),
             to: "/basicregistration/feedrestrictionprogram/1/30/index/{}",
           },
           {
@@ -234,10 +230,7 @@ export function CreateEditFeedRestrictionProgram(props) {
       />
       <Block className="animate__animated animate__fadeInUp">
         <BlockHeader>
-          {translate(
-            "Fill in Feed Restriction Program data",
-            profile.translate
-          )}
+          {translate("Fill in Feed Restriction Program data", profile.language)}
           <Input
             type="switch"
             item={feedRestrictionProgram}

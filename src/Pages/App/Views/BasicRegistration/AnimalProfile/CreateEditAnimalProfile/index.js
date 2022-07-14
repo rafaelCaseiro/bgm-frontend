@@ -159,15 +159,16 @@ export function CreateEditAnimalProfile(props) {
         const response = await Swal.fire({
           title: translate("Create Animal Profile", profile.translate),
           text: translate(
-            "Do you want to confirm Animal Profile creation",
+            "Do you want to confirm Animal Profile creation?",
             profile.translate
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
-            "Yes, Create Animal Profile!",
+            "Yes, Create Animal Profile",
             profile.translate
           ),
           showLoaderOnConfirm: true,
@@ -202,13 +203,14 @@ export function CreateEditAnimalProfile(props) {
         const response = await Swal.fire({
           title: translate("Edit Animal Profile", profile.translate),
           text: translate(
-            "Do you want to confirm Animal Profile edit",
+            "Do you want to confirm Animal Profile edit?",
             profile.translate
           ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#0451e8",
           cancelButtonColor: "#d33",
+          cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
             "Yes, Edit Animal Profile",
             profile.translate

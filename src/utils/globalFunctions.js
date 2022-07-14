@@ -441,6 +441,7 @@ export const translate = (text, language) => {
       es: "Nuevo Programa de Dieta",
     },
     { en: "Crude Fiber", pt: "Fibra Bruta", es: "Fibra Cruda" },
+    { en: "Crude Fiber (%)", pt: "Fibra Bruta (%)", es: "Fibra Cruda (%)" },
     { en: "Amount", pt: "Quantidade", es: "Cantidad" },
     {
       en: "Elementar Composition",
@@ -904,24 +905,94 @@ export const translate = (text, language) => {
       es: "Datos del Programa de Restrição Alimenticia",
     },
     { en: "Phen +Tir", pt: "Fen +Tir", es: "Fen +Tir" },
+    {
+      en: "Digestible Phen +Tyr (%)",
+      pt: "Fen +Tir Digestível (%)",
+      es: "Fen +Tir Digestible (%)",
+    },
     { en: "Histidine", pt: "Histidina", es: "Histidina" },
+    {
+      en: "Digestible Histidine (%)",
+      pt: "Histidina Digestível (%)",
+      es: "Histidina Digestible (%)",
+    },
     { en: "Leucine", pt: "Leucina", es: "Leucina" },
+    {
+      en: "Digestible Leucine (%)",
+      pt: "Leucina Digestível (%)",
+      es: "Leucina Digestible (%)",
+    },
     { en: "Isoleucine", pt: "Isoleucina", es: "Isoleucina" },
-    { en: "Phenylalanine", pt: "Fenilalanina", es: "Fenilalanina" },
+    {
+      en: "Digestible Isoleucine (%)",
+      pt: "Isoleucina Digestível (%)",
+      es: "Isoleucina Digestible (%)",
+    },
+    { en: "Phenilalanine", pt: "Fenilalanina", es: "Fenilalanina" },
+    {
+      en: "Digestible Phenilalanine (%)",
+      pt: "Fenilalanina Digestível (%)",
+      es: "Fenilalanina Digestible (%)",
+    },
     { en: "Valine", pt: "Valina", es: "Valina" },
+    {
+      en: "Digestible Valine (%)",
+      pt: "Valina Digestível (%)",
+      es: "Valina Digestible (%)",
+    },
     { en: "Gli + Ser", pt: "Gli + Ser", es: "Gli + Ser" },
+    {
+      en: "Digestible Gli + Ser (%)",
+      pt: "Gli + Ser Digestível (%)",
+      es: "Gli + Ser Digestible (%)",
+    },
     { en: "Arginine", pt: "Arginina", es: "Arginina" },
+    {
+      en: "Digestible Arginine (%)",
+      pt: "Arginina Digestível (%)",
+      es: "Arginina Digestible (%)",
+    },
     { en: "Tryptophan", pt: "Triptofano", es: "Triptópano" },
+    {
+      en: "Digestible Tryptophan (%)",
+      pt: "Triptofano Digestível (%)",
+      es: "Triptópano Digestible (%)",
+    },
     { en: "Treonine", pt: "Treonina", es: "Treonina" },
+    {
+      en: "Digestible Treonine (%)",
+      pt: "Treonina Digestível (%)",
+      es: "Treonina Digestible (%)",
+    },
     { en: "Met + Cys", pt: "Met + Cis", es: "Met + Cis" },
+    {
+      en: "Digestible Met + Cys (%)",
+      pt: "Met + Cis Digestível (%)",
+      es: "Met + Cis Digestible (%)",
+    },
     { en: "Methionine", pt: "Metionina", es: "Metionine" },
+    {
+      en: "Digestible Methionine (%)",
+      pt: "Metionina Digestível (%)",
+      es: "Metionine Digestible (%)",
+    },
     { en: "Digestible (%)", pt: "Digestível (%)", es: "Digestible (%)" },
     { en: "Total (%)", pt: "Total (%)", es: "Total (%)" },
     { en: "Lysine", pt: "Lisina", es: "Lisina" },
     { en: "Calcium (%)", pt: "Cálcio (%)", es: "Calcio (%)" },
     { en: "Available P (%)", pt: "P Disponível (%)", es: "P Disponible (%)" },
+    {
+      en: "Available Phosphorus (%)",
+      pt: "Fósforo Disponível (%)",
+      es: "Fósforo Disponible (%)",
+    },
     { en: "Crude Fiber (CF)", pt: "Fibra Bruta (FB)", es: "Fibra Bruta (FB)" },
     { en: "total P (%)", pt: "P total (%)", es: "P total (%)" },
+    {
+      en: "total Phosphorus (%)",
+      pt: "Fósforo total (%)",
+      es: "Fósforo total (%)",
+    },
     {
       en: "Eletrolitic Balance (mEq/kg)",
       pt: "Balanço Eletrolítico (mEq/kg)",
@@ -958,13 +1029,23 @@ export const translate = (text, language) => {
     },
     {
       en: "Effective Energy (MJ/kg)",
-      pt: "Energia Verdadeira Ave (Kcal/kg)",
-      es: "Energia Verdadeira Ave (Kcal/kg)",
+      pt: "Energia Verdadeira (Kcal/kg)",
+      es: "Energia Verdadeira (Kcal/kg)",
     },
     {
       en: "True Met. Energy Poultry (Kcal/kg)",
       pt: "Energia Met. Ave (kcal/kg)",
       es: "Energia Met. Ave (kcal/kg)",
+    },
+    {
+      en: "True Met. Energy Verd. (Kcal/kg)",
+      pt: "Energia Met. (kcal/kg)",
+      es: "Energia Met. (kcal/kg)",
+    },
+    {
+      en: "True Met. Energy (Kcal/kg)",
+      pt: "Energia Met. (kcal/kg)",
+      es: "Energia Met. (kcal/kg)",
     },
     {
       en: "Met. Energy Poultry (Kcal/kg)",
@@ -982,9 +1063,24 @@ export const translate = (text, language) => {
       es: "Digerible PB Aves",
     },
     {
+      en: "Digestible CP (%)",
+      pt: "Digestibilidade PB (%)",
+      es: "Digerible PB (%)",
+    },
+    {
+      en: "Digestible Fat (%)",
+      pt: "Digestibilidade Gordura (%)",
+      es: "Digerible Grasa (%)",
+    },
+    {
       en: "Coef. Dig. CP Poultry (%)",
       pt: "Coef. Dig. PB Aves",
       es: "Coef. Dig. PB Aves",
+    },
+    {
+      en: "Coef. Dig. Fat (%)",
+      pt: "Coef. Dig. Gordura  (%)",
+      es: "Coef. Dig. Grasa  (%)",
     },
     {
       en: "Crude Protein (CP) (%)",
@@ -1447,6 +1543,667 @@ export const translate = (text, language) => {
       en: "Ingredient Data",
       pt: "Dados do Ingrediente",
       es: "Datos del Ingrediente",
+    },
+    {
+      en: "Customer",
+      pt: "Cliente",
+      es: "Cliente",
+    },
+    {
+      en: "Customers",
+      pt: "Clientes",
+      es: "Clientes",
+    },
+    {
+      en: "List of optimization",
+      pt: "Lista de otimizações",
+      es: "Lista de otimizações",
+    },
+    {
+      en: "Type the E-mail",
+      pt: "Digite o E-mail",
+      es: "Escriba el correo electrónico",
+    },
+    {
+      en: "Type the Responsibility",
+      pt: "Digite o E-mail",
+      es: "Escriba la responsabilidad",
+    },
+    {
+      en: "City",
+      pt: "Cidade",
+      es: "Ciudad",
+    },
+    {
+      en: "Type the city",
+      pt: "Digite a cidade",
+      es: "Escriba la ciudad",
+    },
+    {
+      en: "State",
+      pt: "Estado",
+      es: "Estado",
+    },
+    {
+      en: "Type the state",
+      pt: "Digite a estado",
+      es: "Escriba la estado",
+    },
+    {
+      en: "Phone Number",
+      pt: "Telefone",
+      es: "Teléfono",
+    },
+    {
+      en: "Select the role",
+      pt: "Selecione a permissão",
+      es: "Selecciona el rol",
+    },
+    {
+      en: "Create User",
+      pt: "Criar Usuário",
+      es: "Crear Usuario",
+    },
+    {
+      en: "New Customer",
+      pt: "Novo Cliente",
+      es: "Nuevo Cliente",
+    },
+    {
+      en: "User",
+      pt: "Usuário",
+      es: "Usuario",
+    },
+    {
+      en: "Fill in Customer data",
+      pt: "Digite os dados do cliente",
+      es: "Escriba los datos del cliente",
+    },
+    {
+      en: "Responsible",
+      pt: "Reponsável",
+      es: "Responsable",
+    },
+    {
+      en: "Create Customer",
+      pt: "Criar Cliente",
+      es: "Crear Cliente",
+    },
+    {
+      en: "Do you want to confirm customer creation?",
+      pt: "Deseja confirma a criação do cliente?",
+      es: "¿Quieres confirmar la creación del cliente?",
+    },
+    {
+      en: "Yes, Create Customer",
+      pt: "Sim, Criar Cliente",
+      es: "Si, Crear Cliente",
+    },
+    {
+      en: "Edit Customer",
+      pt: "Editar Cliente",
+      es: "Editar Cliente",
+    },
+    {
+      en: "Do you want to confirm customer edit?",
+      pt: "Deseja confirma a edição do cliente?",
+      es: "¿Quieres confirmar la edición del cliente?",
+    },
+    {
+      en: "Yes, Edit Customer",
+      pt: "Sim, Editar Cliente",
+      es: "Si, Editar Cliente",
+    },
+    {
+      en: "Cancel",
+      pt: "Cancelar",
+      es: "Cancelar",
+    },
+    {
+      en: "Type the Customer",
+      pt: "Digite o cliente",
+      es: "Escriba el cliente",
+    },
+    {
+      en: "Show default ingredients",
+      pt: "Mostrar Indredientes padrão",
+      es: "Escriba el cliente",
+    },
+    {
+      en: "Edit Ingredient",
+      pt: "Editar ingrediente",
+      es: "Editar ingrediente",
+    },
+    {
+      en: "Create Ingredient",
+      pt: "Criar ingrediente",
+      es: "Editar ingrediente",
+    },
+    {
+      en: "Error to search ingredients",
+      pt: "Erro ao pesquisar ingredientes",
+      es: "Error al buscar ingredientes",
+    },
+    {
+      en: "Ingredient Name",
+      pt: "Nome do Ingrediente",
+      es: "Nombre del ingrediente",
+    },
+    {
+      en: "Price",
+      pt: "Preço",
+      es: "Precio",
+    },
+    {
+      en: "Fill in ingredient data",
+      pt: "Digite os dados do ingrediente",
+      es: "Escriba los datos del ingrediente",
+    },
+    {
+      en: "Type the Customer Name",
+      pt: "Digite o nome do cliente",
+      es: "Escriba el nombre del cliente",
+    },
+    {
+      en: "Value",
+      pt: "Valor",
+      es: "Valor",
+    },
+    {
+      en: "Type the Value",
+      pt: "Digite o valor",
+      es: "Escriba el valor",
+    },
+    {
+      en: "WaterHC",
+      pt: "Capacidade de retenção de água",
+      es: "Capacidad de retención de agua",
+    },
+    {
+      en: "Water HC",
+      pt: "Capacidade de retenção de água",
+      es: "Capacidad de retención de agua",
+    },
+    {
+      en: "Do you want to confirm ingredient edit?",
+      pt: "Deseja confirma a edição do ingrediente?",
+      es: "¿Quieres confirmar la edición del ingrediente?",
+    },
+    {
+      en: "Do you want to confirm ingredient creation?",
+      pt: "Deseja confirma a criação do ingrediente?",
+      es: "¿Quieres confirmar la creación del ingrediente?",
+    },
+    {
+      en: "Yes, Edit Ingredient",
+      pt: "Sim, Editar Ingrediente",
+      es: "Si, Editar Ingrediente",
+    },
+    {
+      en: "Yes, Create Ingredient",
+      pt: "Sim, Criar Ingrediente",
+      es: "Si, Crear Ingrediente",
+    },
+    {
+      en: "Date",
+      pt: "Data",
+      es: "Fecha",
+    },
+    {
+      en: "Showing",
+      pt: "Montrando",
+      es: "Montrando",
+    },
+    {
+      en: "to",
+      pt: "a",
+      es: "a",
+    },
+    {
+      en: "of",
+      pt: "de",
+      es: "de",
+    },
+    {
+      en: "Sort",
+      pt: "Ordenar",
+      es: "Clasificar",
+    },
+    {
+      en: "Ascending",
+      pt: "Crescente",
+      es: "Creciente",
+    },
+    {
+      en: "Descending",
+      pt: "Decrescente",
+      es: "decreciente",
+    },
+    {
+      en: "Composition",
+      pt: "Composição",
+      es: "Composición",
+    },
+    {
+      en: "Aminoacids",
+      pt: "Aminoácidos",
+      es: "Aminoácidos",
+    },
+    {
+      en: "Condiction",
+      pt: "Condição",
+      es: "Condición",
+    },
+    {
+      en: "Feed Restriction Program List",
+      pt: "Lista do Programa de Restrição Alimentar",
+      es: "Lista de programas de restricción de alimentación",
+    },
+    {
+      en: "Feed Restriction Program Name",
+      pt: "Nome do programa de restrição alimentar",
+      es: "Nombre del programa de restricción de alimentación",
+    },
+    {
+      en: "Fill in Feed Restriction Program data",
+      pt: "Preencha os dados do Programa de Restrição Alimentar",
+      es: "Complete los datos del Programa de restricción de alimentación",
+    },
+
+    {
+      en: "Create Feed Restriction Program",
+      pt: "Criar Programa de Restrição Alimentar",
+      es: "Crear Programa de Restricción de Alimentación",
+    },
+    {
+      en: "Edit Feed Restriction Program",
+      pt: "Editar Programa de Restrição Alimentar",
+      es: "Editar Programa de Restricción de Alimentación",
+    },
+    {
+      en: "Do you want to confirm Feed Restriction Program edit?",
+      pt: "Deseja confirma a edição do programa de restrição alimentar?",
+      es: "¿Quieres confirmar la edición del Programa de restricción de alimentación?",
+    },
+    {
+      en: "Do you want to confirm Feed Restriction Program creation?",
+      pt: "Deseja confirma a criação do programa de restrição alimentar?",
+      es: "¿Quieres confirmar la creación del Programa de restricción de alimentación?",
+    },
+    {
+      en: "Yes, Edit Feed Restriction Program",
+      pt: "Sim, Editar programa de restrição alimentar",
+      es: "Si, Editar programa de restricción de alimentación",
+    },
+    {
+      en: "Yes, Create Feed Restriction Program",
+      pt: "Sim, Criar programa de restrição alimentar",
+      es: "Si, Crear programa de restricción de alimentación",
+    },
+    {
+      en: "Diet Program List",
+      pt: "Lista de programas de dieta",
+      es: "Lista de programas de dieta",
+    },
+    {
+      en: "Edit Diet Program",
+      pt: "Editar Programa de Dieta",
+      es: "Editar Programa de Dieta",
+    },
+    {
+      en: "Create Diet Program",
+      pt: "Criar Programa de Dieta",
+      es: "Crear Programa de Dieta",
+    },
+    {
+      en: "Do you want to confirm Diet Program edit?",
+      pt: "Deseja confirma a edição do Programa de Dieta?",
+      es: "¿Quieres confirmar la edición del Programa de Dieta?",
+    },
+    {
+      en: "Do you want to confirm Diet Program creation?",
+      pt: "Deseja confirma a criação do Programa de Dieta?",
+      es: "¿Quieres confirmar la creación del Programa de Dieta?",
+    },
+    {
+      en: "Yes, Edit Diet Program",
+      pt: "Sim, Editar Programa de Dieta",
+      es: "Si, Editar Programa de Dieta",
+    },
+    {
+      en: "Yes, Create Diet Program",
+      pt: "Sim, Criar Programa de Dieta",
+      es: "Si, Crear Programa de Dieta",
+    },
+    {
+      en: "Animal Profile List",
+      pt: "Lista de perfís animais",
+      es: "Lista de perfiles de animales",
+    },
+    {
+      en: "Edit Animal Profile",
+      pt: "Editar Perfil animal",
+      es: "Editar Perfil de Animal",
+    },
+    {
+      en: "Create Animal Profile",
+      pt: "Criar Perfil Animal",
+      es: "Crear Perfil de Animal",
+    },
+    {
+      en: "Do you want to confirm Animal Profile edit?",
+      pt: "Deseja confirma a edição do Perfil Animal?",
+      es: "¿Quieres confirmar la edición del Perfil de Animal?",
+    },
+    {
+      en: "Do you want to confirm Animal Profile  creation?",
+      pt: "Deseja confirma a criação do Perfil Animal?",
+      es: "¿Quieres confirmar la creación del Perfil de Animal?",
+    },
+    {
+      en: "Yes, Edit Animal Profile ",
+      pt: "Sim, Editar Perfil Animal",
+      es: "Si, Editar Perfil de Animal",
+    },
+    {
+      en: "Yes, Create Animal Profile",
+      pt: "Sim, Criar Perfil Animal",
+      es: "Si, Crear Perfil de Animal",
+    },
+    {
+      en: "Calibrate Animal Profile",
+      pt: "Calibrar perfil animal",
+      es: "Calibrar perfil animal",
+    },
+    {
+      en: "Calibration successfuly generated",
+      pt: "Calibração gerada com sucesso",
+      es: "Calibración generada con éxito",
+    },
+    {
+      en: "Environment Variables List",
+      pt: "Lista de Variáveis ​​de Ambiente",
+      es: "Lista de Variables de Entorno",
+    },
+    {
+      en: "New Environment Variables",
+      pt: "Nova Variáveis ​​de Ambiente",
+      es: "Nueva Variables de Entorno",
+    },
+    {
+      en: "Edit Environment Variables",
+      pt: "Editar Variáveis ​​de Ambiente",
+      es: "Editar Variables de Entorno",
+    },
+    {
+      en: "Create Environment Variables",
+      pt: "Criar Variáveis ​​de Ambiente",
+      es: "Crear Variables de Entorno",
+    },
+    {
+      en: "Do you want to confirm Environment Variables edit?",
+      pt: "Deseja confirma a edição do Variáveis ​​de Ambiente?",
+      es: "¿Quieres confirmar la edición del Variables de Entorno?",
+    },
+    {
+      en: "Do you want to confirm Environment Variables creation?",
+      pt: "Deseja confirma a criação do Variáveis ​​de Ambiente?",
+      es: "¿Quieres confirmar la creación del Variables de Entorno?",
+    },
+    {
+      en: "Yes, Edit Environment Variables",
+      pt: "Sim, Editar Variáveis ​​de Ambiente",
+      es: "Si, Editar Variables de Entorno",
+    },
+    {
+      en: "Yes, Create Environment Variables",
+      pt: "Sim, Criar Variáveis ​​de Ambiente",
+      es: "Si, Crear Variables de Entorno",
+    },
+    {
+      en: "Fill in Environment Variables data",
+      pt: "Preencha os dados das Variáveis de Ambiente",
+      es: "Complete los datos de las Variables de Entorno",
+    },
+    {
+      en: "Environment Variables Name",
+      pt: "Nome das Variáveis ​​de Ambiente",
+      es: "Nombre de las Variables de Entorno",
+    },
+    {
+      en: "Fill in diet data",
+      pt: "Preencha os dados da dieta",
+      es: "Complete los datos de la dieta",
+    },
+    {
+      en: "Type the nutrient name",
+      pt: "Digite o nome do nutriente",
+      es: "Escriba el nombre del nutriente",
+    },
+    {
+      en: "Nutrient List",
+      pt: "Lista de Nutrientes",
+      es: "Lista de Nutrientes",
+    },
+    {
+      en: "Check this option to apply the energy, amino acid, Ca and avP estimated in a simulation previously saved",
+      pt: "Marque esta opção para aplicar a energia, aminoácidos, Ca e avP estimados em uma simulação salva anteriormente",
+      es: "Marque esta opción para aplicar la energía, aminoácido, Ca y avP estimados en una simulación previamente guardada",
+    },
+    {
+      en: "Select the Simulation type",
+      pt: "Selecione o tipo de simulação",
+      es: "Seleccione el tipo de simulación",
+    },
+    {
+      en: "Input Nutrients",
+      pt: "Entrada de Nutrientes",
+      es: "Entrada de Nutrientes",
+    },
+    {
+      en: "Input Ingredients",
+      pt: "Entrada de Ingredientes",
+      es: "Entrada de Ingredientes",
+    },
+    {
+      en: "Select the Output Type",
+      pt: "Selecione o Tipo de Saída",
+      es: "Seleccione el tipo de salida",
+    },
+    {
+      en: "Basic",
+      pt: "Basíca",
+      es: "Básica",
+    },
+    {
+      en: "Customized",
+      pt: "Personalizada",
+      es: "Personalizada",
+    },
+    {
+      en: "Simulation Name",
+      pt: "Nome da Simulação",
+      es: "Nombre de la simulación",
+    },
+    {
+      en: "Requirement",
+      pt: "Requerido",
+      es: "Requerido",
+    },
+    {
+      en: "Select the Output values type",
+      pt: "Selecione o tipo de valores de saída",
+      es: "Seleccione el tipo de valores de salida",
+    },
+    {
+      en: "Select the Output Items",
+      pt: "Selecione os campos de saída",
+      es: "Seleccione los elementos de salida",
+    },
+    {
+      en: "One Day Old Weight(g)",
+      pt: "Peso ao primeiro dia(g)",
+      es: "Peso de un día(g)",
+    },
+    {
+      en: "Select the customer",
+      pt: "Selecione o cliente",
+      es: "Seleccione el cliente",
+    },
+    {
+      en: "Select the animal profile",
+      pt: "Selecione o perfil animal",
+      es: "Seleccione el perfile de animal",
+    },
+    {
+      en: "Select the Feed Restriction Program",
+      pt: "Selecione o Programa de Restrição Alimentar",
+      es: "Seleccione el Programa de Restricción de Alimentacion",
+    },
+    {
+      en: "Select the environment",
+      pt: "Selecione o ambiente",
+      es: "Seleccione el ambiente",
+    },
+    {
+      en: "Select the Diet Program",
+      pt: "Selecione o programa de dieta",
+      es: "Seleccione el programa de dieta",
+    },
+    {
+      en: "Initial Weight",
+      pt: "Peso Inicial",
+      es: "Peso Inicial",
+    },
+    {
+      en: "Initial Weight (g)",
+      pt: "Peso Inicial (g)",
+      es: "Peso Inicial (g)",
+    },
+    {
+      en: "Type the Initial Weight (g)",
+      pt: "Digite o Peso Inicial (g)",
+      es: "Escriba el Peso Inicial (g)",
+    },
+    {
+      en: "Final Weight (g)",
+      pt: "Peso Final (g)",
+      es: "Peso Final (g)",
+    },
+    {
+      en: "Type the Final Weight (g)",
+      pt: "Digite o Peso Final (g)",
+      es: "Escriba el Peso Final (g)",
+    },
+    {
+      en: "Age (d)",
+      pt: "Idade (d)",
+      es: "Edad (d)",
+    },
+    {
+      en: "Initial Age (d)",
+      pt: "Idade Inicial (d)",
+      es: "Edad Inicial (d)",
+    },
+    {
+      en: "Type the Initial Age (d)",
+      pt: "Digite a Idade Inicial (d)",
+      es: "Escriba la Edad Inicial (d)",
+    },
+    {
+      en: "Final Age (d)",
+      pt: "Idade Final (d)",
+      es: "Edad Final (d)",
+    },
+    {
+      en: "Type the Final Age (d)",
+      pt: "Digite a Idade Final (d)",
+      es: "Escriba la Edad Final (d)",
+    },
+    {
+      en: "Feed Digestiblity",
+      pt: "Digestibilidade",
+      es: "Digestibilidad",
+    },
+    {
+      en: "General",
+      pt: "Geral",
+      es: "General",
+    },
+    {
+      en: "Parameters",
+      pt: "Parâmetros",
+      es: "Parámetros",
+    },
+    {
+      en: "Diet Parameters",
+      pt: "Parâmetros da dieta",
+      es: "Parámetros de la dieta",
+    },
+    {
+      en: "Phytase",
+      pt: "Fitase",
+      es: "Fitase",
+    },
+    {
+      en: "Phytase (FTU/kg)",
+      pt: "Fitase (FTU/kg)",
+      es: "Fitase (FTU/kg)",
+    },
+    {
+      en: "Type the Phytase (FTU/kg)",
+      pt: "Digite a Fitase (FTU/kg)",
+      es: "escriba la Fitase (FTU/kg)",
+    },
+    {
+      en: "Type the value of ",
+      pt: "Digite o valor de ",
+      es: "escriba el valor de ",
+    },
+    {
+      en: "Type the (%)",
+      pt: "Digite a (%)",
+      es: "escriba la (%)",
+    },
+    {
+      en: "Simulation List",
+      pt: "Lista de Simulações",
+      es: "Lista de Simulaciones",
+    },
+    {
+      en: "Edit Simulation",
+      pt: "Editar Simulação",
+      es: "Editar Simulación",
+    },
+    {
+      en: "Create Simulation",
+      pt: "Cria Simulação",
+      es: "Crear Simulación",
+    },
+    {
+      en: "Simulator",
+      pt: "Simulador",
+      es: "Simulador",
+    },
+    {
+      en: "Do you want to confirm Simulation edit?",
+      pt: "Deseja confirma a edição da Simulação?",
+      es: "¿Quieres confirmar la edición del Simulación?",
+    },
+    {
+      en: "Do you want to confirm Simulation creation?",
+      pt: "Deseja confirma a criação do Simulação?",
+      es: "¿Quieres confirmar la creación de la Simulación?",
+    },
+    {
+      en: "Yes, Edit Simulation",
+      pt: "Sim, Editar Simulação",
+      es: "Si, Editar Perfil de Animal",
+    },
+    {
+      en: "Yes, Create Simulation",
+      pt: "Sim, Criar Simulação",
+      es: "Si, Crear Simulación",
     },
   ];
   config.forEach(function (item) {
