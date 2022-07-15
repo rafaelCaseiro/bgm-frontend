@@ -2328,6 +2328,21 @@ export const translate = (text, language) => {
       pt: "Item Criado com Sucesso!",
       es: "¡Elemento creado con éxito!",
     },
+    {
+      en: "Individual",
+      pt: "Indivíduo",
+      es: "Individual",
+    },
+    {
+      en: "Individual - Comparison",
+      pt: "Indivíduo - Comparação",
+      es: "Individual - Comparación",
+    },
+    {
+      en: "Population - Comparison",
+      pt: "População - Comparação",
+      es: "Población - Comparación",
+    },
   ];
   config.forEach(function (item) {
     if (item.en.toLowerCase() === text.toLowerCase()) {

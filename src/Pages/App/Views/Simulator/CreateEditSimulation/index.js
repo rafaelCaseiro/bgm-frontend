@@ -878,7 +878,7 @@ export function CreateEditSimulation(props) {
                           .map(({ age }) => age),
                         datasets: [
                           {
-                            label: translate("Individuals", profile.language),
+                            label: translate("Individual", profile.language),
                             data: response.individuo
                               .filter(({ age }) => age >= input.start)
                               .map((item) =>
@@ -909,7 +909,7 @@ export function CreateEditSimulation(props) {
                             ? [
                                 {
                                   label: translate(
-                                    "Individuals - Comparison",
+                                    "Individual - Comparison",
                                     profile.language
                                   ),
                                   data: comparison.individuo
