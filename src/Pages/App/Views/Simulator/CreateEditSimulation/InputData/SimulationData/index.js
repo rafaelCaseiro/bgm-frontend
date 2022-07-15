@@ -149,20 +149,17 @@ export function SimulationData({
       </Row>
       <Row>
         <Col>
-          <Input
-            type="input"
-            inputType="number"
-            label={translate(`Feed Digestiblity`, profile.language)}
-            item={input}
-            setItem={setInput}
-            params="feedDigestiblity"
-            required={true}
-          />
-        </Col>
-        <Col>
           <Content>
             <label>{translate(`Health Problem`, profile.language)}</label>
             <CheckboxItems>
+              <Input
+                type="radiobox"
+                label={translate("No", profile.language)}
+                item={input}
+                setItem={setInput}
+                params="healthProblem"
+                value=""
+              />
               <Input
                 type="radiobox"
                 label={translate("Coccidia", profile.language)}
@@ -197,37 +194,6 @@ export function SimulationData({
             />
           </Col>
         )}
-        <Col>
-          {input.simulationType === "feedFormulator" ||
-          input.simulationType === "ingredients" ? (
-            <Input
-              type="select"
-              label={translate("Mash or Pellet?", profile.language)}
-              item={input}
-              setItem={setInput}
-              params="pelletFeed"
-              required={true}
-              options={[{ value: "Mash" }, { value: "Pellet" }]}
-            />
-          ) : null}
-        </Col>
-        <Col>
-          {(input.simulationType === "feedFormulator" ||
-            input.simulationType === "ingredients") &&
-          input.pelletFeed === "Pellet" ? (
-            <Input
-              type="input"
-              label={translate("% Fines", profile.language)}
-              item={input}
-              setItem={setInput}
-              params="percFines"
-              placeholder="% Fines"
-              min={0}
-              max={100}
-              required={true}
-            />
-          ) : null}
-        </Col>
       </Row>
     </>
   );

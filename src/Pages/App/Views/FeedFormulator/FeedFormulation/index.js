@@ -5,6 +5,7 @@ import {
   TableContent,
 } from "../../../../../Components/Table/style";
 import {
+  compareValues,
   convertNumberToString,
   translate,
 } from "../../../../../utils/globalFunctions";
@@ -22,26 +23,26 @@ export function FeedFormulation({ profile, response }) {
           </tr>
         </Header>
         <Body>
-          {response?.feedFormulation?.ingredients?.map(
-            ({ nome, preco, value }) => (
+          {response?.feedFormulation?.ingredients
+            ?.sort(compareValues("value", "desc"))
+            .map(({ nome, preco, value }) => (
               <tr>
                 <Td>{nome}</Td>
-                <Td>{convertNumberToString(value, 2)}</Td>
-                <Td>{convertNumberToString(preco, 2)}</Td>
+                <Td>{convertNumberToString(value, 3)}</Td>
+                <Td>{convertNumberToString(preco, 3)}</Td>
               </tr>
-            )
-          )}
+            ))}
         </Body>
         <Header>
           <tr>
             <th>{translate("Total", profile.language)}</th>
             <th>
-              {convertNumberToString(response?.feedFormulation?.percentual, 2)}
+              {convertNumberToString(response?.feedFormulation?.percentual, 3)}
             </th>
             <th>
               {convertNumberToString(
                 response?.feedFormulation?.objetivoValue,
-                2
+                3
               )}
             </th>
           </tr>

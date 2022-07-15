@@ -282,13 +282,13 @@ export function CreateEditEnvironmentVariables(props) {
                 <TableContent style={{ width: "100%" }}>
                   <Header>
                     <tr>
-                      <th style={{ width: 50 }}>
-                        {translate("index", profile.language)}
-                      </th>
+                      <th>{translate("Initial Age", profile.language)}</th>
 
-                      <th>{translate("Age", profile.language)}*</th>
+                      <th>{translate("Final Age", profile.language)}*</th>
                       <th>{translate("Humidity(%)", profile.language)}*</th>
-                      <th>{translate("Density(m²)", profile.language)}*</th>
+                      <th>
+                        {translate("Density(bird/m²)", profile.language)}*
+                      </th>
                       <th>{translate("Temperature(Cº)", profile.language)}*</th>
                       <th>
                         {translate("Air Velocity(m/s²)", profile.language)}*
@@ -299,7 +299,12 @@ export function CreateEditEnvironmentVariables(props) {
                   <Body>
                     {environmentVariables.dados.map((item, index) => (
                       <tr key={index}>
-                        <td>{index + 1}</td>
+                        <td>
+                          {index === 0
+                            ? 1
+                            : +environmentVariables.dados[index - 1].idadeFim +
+                              1}
+                        </td>
                         <td>
                           <Input
                             inputType="number"

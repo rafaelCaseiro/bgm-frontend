@@ -120,7 +120,9 @@ export function IngredientsInput({
                     </CheckboxItems>
                   </td>
                 ) : key === "FinesFeed" &&
-                  input.diet[index].PelletFeed === "Mash" ? null : (
+                  input.diet[index].PelletFeed === "Mash" ? (
+                  <Td></Td>
+                ) : (
                   <Td>
                     <InputTable
                       type="inputOnly"

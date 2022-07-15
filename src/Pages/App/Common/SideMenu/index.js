@@ -19,7 +19,7 @@ import { translate } from "../../../../utils/globalFunctions";
 
 export function SideBar() {
   const config = [
-    { model: "home", label: "Home", icon: "home" },
+    { model: "home", label: "Home", icon: "home", to: "/" },
     {
       model: "admin",
       label: "Administration",
@@ -49,6 +49,12 @@ export function SideBar() {
           label: "Ingredients",
           icon: "database",
           to: "/basicregistration/ingredient/1/30/index/{}/true",
+        },
+        {
+          model: "feedformulator",
+          label: "Feed Formulator",
+          icon: "sliders",
+          to: "/feedformulator",
         },
         {
           model: "dietcomposition",
@@ -83,12 +89,7 @@ export function SideBar() {
         },
       ],
     },
-    {
-      model: "feedformulator",
-      label: "Feed Formulator",
-      icon: "sliders",
-      to: "/feedformulator",
-    },
+
     {
       model: "simulator",
       label: "Simulator",

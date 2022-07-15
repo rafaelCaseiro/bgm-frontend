@@ -154,9 +154,9 @@ export function Ingredients({
                 }
                 return true;
               })
-              .filter(({ customer }) => {
+              .filter(({ customer, ...rest }) => {
                 if (filter.customer) {
-                  return customer === filter.customer;
+                  return customer === filter.customer || rest.default;
                 }
                 return true;
               })

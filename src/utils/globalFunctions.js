@@ -500,6 +500,11 @@ export const translate = (text, language) => {
       es: "EE para deposición lipídica (KJ)",
     },
     {
+      en: "EE for lipid deposition (Kcal/day)",
+      pt: "EE para deposção de lipídeo (Kcal/dia)",
+      es: "EE para deposición lipídica (Kcal/dia)",
+    },
+    {
       en: "EE for lipids deposition (KJ)",
       pt: "EE para deposção de lipídeo (KJ)",
       es: "EE para deposición lipídica (KJ)",
@@ -515,9 +520,19 @@ export const translate = (text, language) => {
       es: "EE para la deposición de proteínas (KJ)",
     },
     {
+      en: "EE for protein deposition (Kcal/day)",
+      pt: "EE para deposição de proteína (Kcal/dia)",
+      es: "EE para la deposición de proteínas (Kcal/dia)",
+    },
+    {
       en: "EE Requirement (KJ)",
       pt: "EE Exigência (KJ)",
       es: "EE Exigencia (KJ)",
+    },
+    {
+      en: "EE Requirement (Kcal/day)",
+      pt: "EE Exigência (Kcal/dia)",
+      es: "EE Exigencia (Kcal/dia)",
     },
     { en: "Weight (g)", pt: "Peso (g)", es: "Peso (g)" },
     { en: "Graphics", pt: "Gráficos", es: "Gráficos" },
@@ -539,7 +554,8 @@ export const translate = (text, language) => {
       es: "Energía Metabolizable(cal/d)",
     },
     { en: "Amino Acids", pt: "Aminoácidos", es: "Aminoácidos" },
-    { en: "Ash Body(g)", pt: "Cínzas Corporal(g)", es: "Ceniza del Cuerpo(g)" },
+    { en: "Ash Body(g)", pt: "Cinzas Corporal(g)", es: "Ceniza del Cuerpo(g)" },
+    { en: "Ash (%)", pt: "Cinzas (%)", es: "Ceniza (%)" },
     { en: "Water Body(g)", pt: "Água Corporal(g)", es: "Agua del Cuerpo(g)" },
     { en: "Y Axes", pt: "Eixo Y", es: "Eje Y" },
     { en: "X Axes", pt: "Eixo X", es: "Eje X" },
@@ -624,24 +640,40 @@ export const translate = (text, language) => {
     { en: "Breast (g)", pt: "Peito (g)", es: "Pechuga (g)" },
     { en: "Body Weight (g)", pt: "Peso Vivo (g)", es: "Peso corporal (g)" },
     {
-      en: "Feed Convertion (g)",
+      en: "Feed Conversion (g/g)",
       pt: "Conversão Alimentar (g/g)",
       es: "Conversión de alimentación (g/g)",
     },
+
     {
       en: "Body Weight Gain (g)",
       pt: "Ganho de Peso (g)",
       es: "Aumento de peso corporal (g)",
     },
     {
-      en: "actual Feed Intake (g)",
+      en: "Body Weight Gain (g/day)",
+      pt: "Ganho de Peso (g/dia)",
+      es: "Aumento de peso corporal (g/dia)",
+    },
+    {
+      en: "Actual Feed Intake (g)",
       pt: "Consumo de ração atual (g)",
       es: "Ingesta real de alimento (g)",
+    },
+    {
+      en: "Actual Feed Intake (g/day)",
+      pt: "Consumo de ração atual (g/dia)",
+      es: "Ingesta real de alimento (g/dia)",
     },
     {
       en: "desired Feed Intake (g)",
       pt: "Consumo de ração desejado (g)",
       es: "Ingesta de alimento deseada (g)",
+    },
+    {
+      en: "desired Feed Intake (g/day)",
+      pt: "Consumo de ração desejado (g/dia)",
+      es: "Ingesta de alimento deseada (g/dia)",
     },
     { en: "Calcium (%)", pt: "Cálcio (%)", es: "Calcio (%)" },
     { en: "Calcium (g)", pt: "Cálcio (g)", es: "Calcio (g)" },
@@ -656,19 +688,24 @@ export const translate = (text, language) => {
       es: "Fósforo disp. (g)",
     },
     {
-      en: "EE for lipids deposition (kJ/day)",
-      pt: "EE para deposícão de lipídeo (kJ/day)",
-      es: "EE para deposición de lípidos (kJ / día)",
+      en: "EE for lipids deposition (Kcal/day)",
+      pt: "EE para deposícão de lipídeo (Kcal/dia)",
+      es: "EE para deposición de lípidos (Kcal/día)",
     },
     {
       en: "EE for protein deposition (kJ/day)",
-      pt: "EE para deposição de proteína (kJ/day)",
-      es: "EE para la deposición de proteína (kJ/day)",
+      pt: "EE para deposição de proteína (kJ/dia)",
+      es: "EE para la deposición de proteína (kJ/dia)",
     },
     {
       en: "EE for maintenance (kJ/day)",
       pt: "EE para mantença (kJ/day)",
       es: "EE para mantenimiento (kJ/day)",
+    },
+    {
+      en: "EE for maintenance (Kcal/day)",
+      pt: "EE para mantença (Kcal/dia)",
+      es: "EE para mantenimiento (Kcal/dia)",
     },
     {
       en: "EE requirement (kJ/day)",
@@ -834,12 +871,13 @@ export const translate = (text, language) => {
       es: "escriba el nombre del ambiente",
     },
     {
-      en: "Air Velocity(m/s²)",
+      en: "Air Velocity(m/s)",
       pt: "Velocidade do Ar(m/s)",
-      es: "Velocidad del aire(m/s²)",
+      es: "Velocidad del aire(m/s)",
     },
     { en: "Temperature(Cº)", pt: "Temperatura(Cº)", es: "Temperatura(Cº)" },
     { en: "Density(m²)", pt: "Densidade(m²)", es: "Densidad(m²)" },
+    { en: "Density(bird/m²)", pt: "Densidade(ave/m²)", es: "Densidad(ave/m²)" },
     { en: "Humidity(%)", pt: "Umidade(%)", es: "Humedad(%)" },
     {
       en: "Environment Variables",
@@ -1442,6 +1480,8 @@ export const translate = (text, language) => {
       es: "Coeficiente b (Agua/Proteína)",
     },
     { en: "Mineral b (g)", pt: "Mineral b (g)", es: "Mineral b (g)" },
+    { en: "Ash b (g)", pt: "Cinzas b (g)", es: "Ceniza b (g)" },
+    { en: "Ash a (g)", pt: "Cinzas a (g)", es: "Ceniza a (g)" },
     {
       en: "Initial Body weight (g)",
       pt: "Peso vivo no inicio (g)",
@@ -2343,6 +2383,26 @@ export const translate = (text, language) => {
       pt: "População - Comparação",
       es: "Población - Comparación",
     },
+    {
+      en: "Initial Condiction",
+      pt: "Condição Inicial",
+      es: "Condición Inicial",
+    },
+    {
+      en: "Final Condiction",
+      pt: "Condição Final",
+      es: "Condición Final",
+    },
+    {
+      en: "No",
+      pt: "Não",
+      es: "No",
+    },
+    {
+      en: "Cumulated Feed Intake (g)",
+      pt: "Consumo de ração acumulado (g)",
+      es: "Ingesta de alimento acumulada (g)",
+    },
   ];
   config.forEach(function (item) {
     if (item.en.toLowerCase() === text.toLowerCase()) {
@@ -2361,11 +2421,67 @@ export const convertNumberToString = (number, decimals) => {
         arrayDecimals += "0";
       }
     }
-
-    return new StringMask("#.##0" + arrayDecimals, { reverse: true }).apply(
-      (Math.round(number * 100) / 100).toFixed(decimals || 0).replace(".", "")
-    );
+    const toNumber = +number;
+    return toNumber.toLocaleString(undefined, {
+      minimumFractionDigits: decimals || 0,
+    });
   } catch (e) {
     return 0;
   }
+};
+
+export const compareValues = (key, order) => {
+  return function (a, b) {
+    const keys = key.split(".");
+    let varA = "-";
+    let varB = "-";
+    if (keys[2]) {
+      if (a[keys[0]] && a[keys[0]][keys[1]]) {
+        varA =
+          typeof a[keys[0]][keys[1]][keys[2]] === "string"
+            ? a[keys[0]][keys[1]][keys[2]].toUpperCase()
+            : a[keys[0]][keys[1]][keys[2]];
+      }
+      if (b[keys[0]] && b[keys[0]][keys[1]]) {
+        varB =
+          typeof b[keys[0]][keys[1]][keys[2]] === "string"
+            ? b[keys[0]][keys[1]][keys[2]].toUpperCase()
+            : b[keys[0]][keys[1]][keys[2]];
+      }
+    } else if (keys[1]) {
+      if (a[keys[0]]) {
+        varA =
+          typeof a[keys[0]][keys[1]] === "string"
+            ? a[keys[0]][keys[1]].toUpperCase()
+            : a[keys[0]][keys[1]];
+      }
+      if (b[keys[0]]) {
+        varB =
+          typeof b[keys[0]][keys[1]] === "string"
+            ? b[keys[0]][keys[1]].toUpperCase()
+            : b[keys[0]][keys[1]];
+      }
+    } else {
+      if (a[keys[0]]) {
+        varA =
+          typeof a[keys[0]] === "string"
+            ? a[keys[0]].toUpperCase()
+            : a[keys[0]];
+      }
+      if (b[keys[0]]) {
+        varB =
+          typeof b[keys[0]] === "string"
+            ? b[keys[0]].toUpperCase()
+            : b[keys[0]];
+      }
+    }
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return order === "desc" ? comparison * -1 : comparison;
+  };
 };

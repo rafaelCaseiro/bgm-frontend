@@ -477,7 +477,7 @@ export function CreateEditAnimalProfile(props) {
                     setItem={setAnimalProfile}
                     params="mineralA"
                     required
-                    label={translate("Mineral a (g)", profile.language)}
+                    label={translate("Ash a (g)", profile.language)}
                   />
                 </Col>
                 <Col>
@@ -488,7 +488,7 @@ export function CreateEditAnimalProfile(props) {
                     setItem={setAnimalProfile}
                     params="MineralB"
                     required
-                    label={translate("Mineral b (g)", profile.language)}
+                    label={translate("Ash b (g)", profile.language)}
                   />
                 </Col>
               </Row>

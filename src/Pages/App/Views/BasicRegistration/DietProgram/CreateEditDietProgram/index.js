@@ -281,11 +281,11 @@ export function CreateEditDietProgram(props) {
                 <TableContent style={{ width: "100%" }}>
                   <Header>
                     <tr>
-                      <th style={{ width: 50 }}>
-                        {translate("index", profile.language)}
+                      <th>
+                        {translate(`Initial Condiction`, profile.language)}
                       </th>
 
-                      <th>{translate("Condition", profile.language)}</th>
+                      <th>{translate(`Final Condiction`, profile.language)}</th>
                       <th>{translate("Diet", profile.language)}</th>
                       <th style={{ width: 50 }}></th>
                     </tr>
@@ -293,7 +293,11 @@ export function CreateEditDietProgram(props) {
                   <Body>
                     {dietProgram.dietas.map(({ fim }, index) => (
                       <tr key={index}>
-                        <td>{index + 1}</td>
+                        <td>
+                          {index === 0
+                            ? 1
+                            : +dietProgram.dietas[index - 1].value + 1}
+                        </td>
                         <td>
                           {fim ? (
                             translate("End", profile.language)

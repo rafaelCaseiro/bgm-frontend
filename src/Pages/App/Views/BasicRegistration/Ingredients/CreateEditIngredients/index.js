@@ -154,7 +154,7 @@ export function CreateEditIngredient(props) {
         100,
     },
     { label: "Organic Matter (OM) (%)", key: "materiaOrganica" },
-    { label: "Mineral (%)", key: "materiaMineral" },
+    { label: "Ash (%)", key: "materiaMineral" },
     { label: "Potassium (%)", key: "potassio" },
     { label: "Sodium (%)", key: "sodio" },
     { label: "Chloride (%)", key: "cloro" },
@@ -196,6 +196,8 @@ export function CreateEditIngredient(props) {
 
   const [getIngredient, setGetIngredient] = useState(true);
 
+  const [customers, setCustomers] = useState([]);
+
   const saveIngredient = async (e) => {
     try {
       e.preventDefault();
@@ -206,7 +208,7 @@ export function CreateEditIngredient(props) {
           query.composicao[key] = value;
         });
 
-      if (!params.id) {
+      if (!params.id || ingredient.default) {
         const response = await Swal.fire({
           title: translate("Create Ingredient", profile.language),
           text: translate(
@@ -294,6 +296,12 @@ export function CreateEditIngredient(props) {
 
   useEffect(() => {
     const loadIngredient = async () => {
+      const responseCustomer = await api.post("filter/list", {
+        model: "customer",
+        sort: "name",
+        select: "name",
+      });
+      setCustomers(responseCustomer.data);
       if (params.id) {
         const responseIngredient = await api
           .get(`ingredient/${params.id}`)
@@ -376,17 +384,34 @@ export function CreateEditIngredient(props) {
                   item={ingredient}
                   setItem={setIngredient}
                   params={`customer`}
-                  type="autocomplete"
+                  type="select"
                   label={translate("Customer", profile.language)}
-                  paramsGet={["name"]}
-                  paramsLabel={["name"]}
-                  select={"name"}
-                  model={"customer"}
                   placeholder={translate(
-                    "Type the customer name",
+                    "Select the customer",
                     profile.language
                   )}
+                  options={customers.map(({ _id, name }) => ({
+                    value: _id,
+                    label: name,
+                  }))}
                 />
+                {ingredient.customer && (
+                  <FontAwesome
+                    onClick={() =>
+                      setIngredient({ ...ingredient, customer: "" })
+                    }
+                    name="close"
+                    size={15}
+                    type="solid"
+                    hover={true}
+                    style={{
+                      position: "absolute",
+                      right: 25,
+                      top: 33,
+                      cursor: "pointer",
+                    }}
+                  />
+                )}
               </Col>
             </Row>
             <Row>

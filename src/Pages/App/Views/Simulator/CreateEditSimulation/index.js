@@ -124,25 +124,25 @@ export function CreateEditSimulation(props) {
         label: "Energy Partitioning",
         checked: true,
         showColumns: false,
-        graphData: "EERequired",
+        graphData: "EERequiredKcal",
         columns: {
-          EERequired: {
-            label: "EE requirement (kJ)",
+          EERequiredKcal: {
+            label: "EE requirement (Kcal/day)",
             checked: true,
             decimals: 2,
           },
-          EEforMaintenance: {
-            label: "EE for maintenance (kJ)",
+          EEforMaintenanceKcal: {
+            label: "EE for maintenance (Kcal/day)",
             checked: true,
             decimals: 2,
           },
-          EEforProteinDepositionReq: {
-            label: "EE for protein deposition (kJ)",
+          EEforProteinDepositionReqKcal: {
+            label: "EE for protein deposition (Kcal/day)",
             checked: true,
             decimals: 2,
           },
-          EEforLipidDepositionReq: {
-            label: "EE for lipids deposition (kJ)",
+          EEforLipidDepositionReqKcal: {
+            label: "EE for lipids deposition (Kcal/day)",
             checked: true,
             decimals: 2,
           },
@@ -297,19 +297,28 @@ export function CreateEditSimulation(props) {
         graphData: "Weight",
         columns: {
           Weight: { label: "Body Weight (g)", checked: true, decimals: 2 },
-          Gain: { label: "Body Weight Gain (g)", checked: true, decimals: 2 },
+          Gain: {
+            label: "Body Weight Gain (g/day)",
+            checked: true,
+            decimals: 2,
+          },
           DesiredFIValue: {
-            label: "Desired Feed Intake (g)",
+            label: "Desired Feed Intake (g/day)",
             checked: true,
             decimals: 2,
           },
           FeedIntake: {
-            label: "Actual Feed Intake (g)",
+            label: "Actual Feed Intake (g/day)",
             checked: true,
             decimals: 2,
           },
           FeedConversion: {
-            label: "Feed Conversion (g)",
+            label: "Feed Conversion (g/g)",
+            checked: true,
+            decimals: 2,
+          },
+          FeedIntakeCumulated: {
+            label: "Cumulated Feed Intake (g)",
             checked: true,
             decimals: 2,
           },
@@ -389,14 +398,23 @@ export function CreateEditSimulation(props) {
         graphData: "Weight",
         columns: {
           Weight: { label: "Body Weight (g)", checked: true, decimals: 2 },
-          Gain: { label: "Body Weight Gain (g)", checked: true, decimals: 2 },
+          Gain: {
+            label: "Body Weight Gain (g/day)",
+            checked: true,
+            decimals: 2,
+          },
           FeedIntake: {
-            label: "actual Feed Intake (g)",
+            label: "Actual Feed Intake (g/day)",
             checked: true,
             decimals: 2,
           },
           FeedConversion: {
-            label: "Feed Conversion Ratio (g)",
+            label: "Feed Conversion Ratio (g/day)",
+            checked: true,
+            decimals: 2,
+          },
+          FeedIntakeCumulated: {
+            label: "Cumulated Feed Intake (g)",
             checked: true,
             decimals: 2,
           },
@@ -463,7 +481,7 @@ export function CreateEditSimulation(props) {
     pelletFeed: "Mash",
     initialWeight: "",
     feedDigestiblity: 1,
-    healthProblem: "coccidia",
+    healthProblem: "",
     start: 1,
     end: "",
     diet: [],
@@ -678,6 +696,11 @@ export function CreateEditSimulation(props) {
       setSimulations(responseSimulations.data);
       if (params.id) {
         const responseSimulation = await api.get("simulation/" + params.id);
+        if (responseSimulation.data.customer) {
+          responseSimulation.data.customer =
+            responseSimulation.data.customer._id;
+        }
+
         setInput(responseSimulation.data);
         await simulate(responseSimulation.data);
       }
@@ -707,6 +730,7 @@ export function CreateEditSimulation(props) {
               profile.language
             ),
           },
+          ...(params.id ? [{ label: input.nome }] : []),
         ]}
         otherButtons={
           isGenerated
@@ -856,7 +880,7 @@ export function CreateEditSimulation(props) {
                         options={simulations
                           .filter(({ customer }) =>
                             input.customer
-                              ? customer === input.customer._id || !customer
+                              ? customer === input.customer || !customer
                               : true
                           )
                           .map(({ _id, nome }) => ({

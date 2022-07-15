@@ -32,8 +32,16 @@ export function NutritionalRequirement({ profile, response }) {
                 <Td>{convertNumberToString(value, 3)}</Td>
                 <Td>{convertNumberToString(min, 3)}</Td>
                 <Td>{convertNumberToString(max, 3)}</Td>
-                <Td>{convertNumberToString(difMin, 3)}</Td>
-                <Td>{convertNumberToString(difMax, 3)}</Td>
+                <Td>
+                  {convertNumberToString(difMin, 3).replace("-", "") === "0,000"
+                    ? "-"
+                    : convertNumberToString(difMin, 3)}
+                </Td>
+                <Td>
+                  {convertNumberToString(difMax, 3).replace("-", "") === "0,000"
+                    ? "-"
+                    : convertNumberToString(difMax, 3)}
+                </Td>
               </tr>
             )
           )}

@@ -101,6 +101,21 @@ export function InputAndOutputType({
               label: name,
             }))}
           />
+          {input.customer && (
+            <FontAwesome
+              onClick={() => setInput({ ...input, customer: "" })}
+              name="close"
+              size={15}
+              type="solid"
+              hover={true}
+              style={{
+                position: "absolute",
+                right: 25,
+                top: 33,
+                cursor: "pointer",
+              }}
+            />
+          )}
         </Col>
         <Col>
           <Input

@@ -290,11 +290,10 @@ export function CreateEditFeedRestrictionProgram(props) {
                 <TableContent style={{ width: "100%" }}>
                   <Header>
                     <tr>
-                      <th style={{ width: 50 }}>
-                        {translate("index", profile.language)}
+                      <th>
+                        {translate(`Initial Condiction`, profile.language)}
                       </th>
-
-                      <th>{translate("Condition", profile.language)}</th>
+                      <th>{translate(`Final Condiction`, profile.language)}</th>
                       <th>{translate("Offered Feed", profile.language)}</th>
                       <th style={{ width: 50 }}></th>
                     </tr>
@@ -302,7 +301,12 @@ export function CreateEditFeedRestrictionProgram(props) {
                   <Body>
                     {feedRestrictionProgram.condicoes.map(({ fim }, index) => (
                       <tr key={index}>
-                        <td>{index + 1}</td>
+                        <td>
+                          {index === 0
+                            ? 1
+                            : +feedRestrictionProgram.condicoes[index - 1]
+                                .value + 1}
+                        </td>
                         <td>
                           {fim ? (
                             translate("End", profile.language)
