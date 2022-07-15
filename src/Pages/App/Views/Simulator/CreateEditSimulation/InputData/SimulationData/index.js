@@ -75,11 +75,11 @@ export function SimulationData({
           <Input
             type="input"
             inputType="number"
-            label={translate("One Day Old Weight(g) ", profile.language)}
+            label={translate("One Day Old Weight(g)", profile.language)}
             item={input}
             setItem={setInput}
             params="initialWeight"
-            placeholder="Initial Weight"
+            placeholder={translate("Initial Weight", profile.language)}
             required={true}
           />
         </Col>

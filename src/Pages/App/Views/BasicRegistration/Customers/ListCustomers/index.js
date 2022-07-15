@@ -6,12 +6,14 @@ import { useContext } from "react";
 import { translate } from "../../../../../../utils/globalFunctions";
 
 export function ListCustomers(props) {
+  const { profile } = useContext(Profile);
+
   const tableParams = [
     {
       key: "name",
-      label: "Name",
+      label: translate("Name", profile.language),
       filter: "text",
-      placeholder: "type the Name",
+      placeholder: translate("type the Name", profile.language),
       mobile: {
         type: "title",
       },
@@ -19,18 +21,18 @@ export function ListCustomers(props) {
 
     {
       key: "city",
-      label: "City",
+      label: translate("City", profile.language),
       filter: "text",
-      placeholder: "Type the City",
+      placeholder: translate("Type the City", profile.language),
       mobile: {
         type: "item",
       },
     },
     {
       key: "state",
-      label: "State",
+      label: translate("State", profile.language),
       filter: "text",
-      placeholder: "Type the State",
+      placeholder: translate("Type the State", profile.language),
       mobile: {
         type: "item",
       },
@@ -45,8 +47,6 @@ export function ListCustomers(props) {
       },
     },
   ];
-
-  const { profile } = useContext(Profile);
 
   return (
     <>

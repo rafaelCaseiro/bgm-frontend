@@ -70,7 +70,7 @@ export function CreateEditCustomer(props) {
         }
         Swal.fire(
           translate("Create Customer", profile.language),
-          response.value.data.message,
+          translate(response.value.data.message, profile.language),
           response.value.err ? "error" : "success"
         );
         navigate("/basicregistration/customer/edit/" + response.value.data.id, {
@@ -101,7 +101,7 @@ export function CreateEditCustomer(props) {
       if (response.value) {
         Swal.fire(
           translate("Edit Customer", profile.language),
-          response.value.data.message,
+          translate(response.value.data.message, profile.language),
           response.value.err ? "error" : "success"
         );
         setGetCustomer(true);

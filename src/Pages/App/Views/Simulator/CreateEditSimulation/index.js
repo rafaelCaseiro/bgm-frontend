@@ -430,7 +430,7 @@ export function CreateEditSimulation(props) {
             decimals: 2,
           },
           DesiredTrprequiredDiet: {
-            label: "Triptophan",
+            label: "Tryptophan (%)",
             checked: true,
             decimals: 2,
           },
@@ -475,6 +475,11 @@ export function CreateEditSimulation(props) {
   const [response, setResponse] = useState({});
 
   const [simulations, setSimulations] = useState([]);
+
+  const [comparison, setComparison] = useState({
+    individuo: [],
+    populacao: [],
+  });
 
   const saveSimulation = async (e) => {
     try {
@@ -601,6 +606,7 @@ export function CreateEditSimulation(props) {
         setResponse(response.data);
         setLoading(false);
         setIsGenerated(true);
+        setLoadingData(false);
         window.scrollTo(0, 0);
         tabRef?.current?.click();
       } catch (e) {
@@ -613,6 +619,16 @@ export function CreateEditSimulation(props) {
     },
     [profile.language]
   );
+
+  const comparisonHandler = async (e) => {
+    setInput((prevState) => {
+      const newState = JSON.parse(JSON.stringify(prevState));
+      newState.outputItems[tabKey].comparison = e.target.value;
+      return newState;
+    });
+    const responseSimulation = await api.get("simulation/" + e.target.value);
+    setComparison(responseSimulation.data.response);
+  };
 
   useEffect(() => {
     const getInitData = async () => {
@@ -663,7 +679,7 @@ export function CreateEditSimulation(props) {
       if (params.id) {
         const responseSimulation = await api.get("simulation/" + params.id);
         setInput(responseSimulation.data);
-        simulate(responseSimulation.data);
+        await simulate(responseSimulation.data);
       }
 
       setLoadingData(false);
@@ -836,10 +852,11 @@ export function CreateEditSimulation(props) {
                         item={input}
                         setItem={setInput}
                         params={`outputItems.${tabKey}.comparison`}
+                        onChange={comparisonHandler}
                         options={simulations
                           .filter(({ customer }) =>
                             input.customer
-                              ? customer === input.customer || !customer
+                              ? customer === input.customer._id || !customer
                               : true
                           )
                           .map(({ _id, nome }) => ({
@@ -895,7 +912,7 @@ export function CreateEditSimulation(props) {
                                     "Individuals - Comparison",
                                     profile.language
                                   ),
-                                  data: response.individuo
+                                  data: comparison.individuo
                                     .filter(({ age }) => age >= input.start)
                                     .map((item) =>
                                       input.outputItems[tabKey]?.graphData
@@ -912,8 +929,8 @@ export function CreateEditSimulation(props) {
                                     "Population - Comparison",
                                     profile.language
                                   ),
-                                  data: response.populacao
-                                    ? response.populacao
+                                  data: comparison.populacao
+                                    ? comparison.populacao
                                         .filter(({ age }) => age >= input.start)
                                         .map((item) =>
                                           input.outputItems[tabKey]?.graphData

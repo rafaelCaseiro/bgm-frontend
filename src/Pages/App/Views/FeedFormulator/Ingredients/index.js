@@ -116,7 +116,7 @@ export function Ingredients({
             value={filter.diet}
             onChange={dietHandler}
             label={translate("Saved Diets", profile.language)}
-            placeholder={translate("Select  Diet", profile.language)}
+            placeholder={translate("Select Diet", profile.language)}
             options={diets}
           />
           {filter.diet && (

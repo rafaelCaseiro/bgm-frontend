@@ -135,15 +135,15 @@ export function CreateEditAnimalProfile(props) {
         taxaProt: response.data.taxaProt.toFixed(3),
       });
       Swal.fire(
-        translate("Calibrate Animal Profile", profile.translate),
-        translate("Calibration successfuly generated", profile.translate),
+        translate("Calibrate Animal Profile", profile.language),
+        translate("Calibration successfuly generated", profile.language),
         "success"
       );
       setLoadingCalibration(false);
     } catch (e) {
       Swal.fire(
-        translate("Calibrate Animal Profile", profile.translate),
-        translate("Error calibrating Animal Profile", profile.translate),
+        translate("Calibrate Animal Profile", profile.language),
+        translate("Error calibrating Animal Profile", profile.language),
         "error"
       );
       setLoadingCalibration(false);
@@ -157,10 +157,10 @@ export function CreateEditAnimalProfile(props) {
 
       if (!params.id) {
         const response = await Swal.fire({
-          title: translate("Create Animal Profile", profile.translate),
+          title: translate("Create Animal Profile", profile.language),
           text: translate(
             "Do you want to confirm Animal Profile creation?",
-            profile.translate
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
@@ -169,7 +169,7 @@ export function CreateEditAnimalProfile(props) {
           cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
             "Yes, Create Animal Profile",
-            profile.translate
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -181,14 +181,14 @@ export function CreateEditAnimalProfile(props) {
         if (response.value) {
           if (response.value.err) {
             return Swal.fire(
-              translate("Save Animal Profile", profile.translate),
-              translate("Error saving Animal Profile", profile.translate),
+              translate("Save Animal Profile", profile.language),
+              translate("Error saving Animal Profile", profile.language),
               "error"
             );
           }
           Swal.fire(
-            translate("Create Animal Profile", profile.translate),
-            response.value.data.message,
+            translate("Create Animal Profile", profile.language),
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           navigate(
@@ -201,10 +201,10 @@ export function CreateEditAnimalProfile(props) {
         }
       } else {
         const response = await Swal.fire({
-          title: translate("Edit Animal Profile", profile.translate),
+          title: translate("Edit Animal Profile", profile.language),
           text: translate(
             "Do you want to confirm Animal Profile edit?",
-            profile.translate
+            profile.language
           ),
           icon: "warning",
           showCancelButton: true,
@@ -213,7 +213,7 @@ export function CreateEditAnimalProfile(props) {
           cancelButtonText: translate("Cancel", profile.language),
           confirmButtonText: translate(
             "Yes, Edit Animal Profile",
-            profile.translate
+            profile.language
           ),
           showLoaderOnConfirm: true,
           preConfirm: async () =>
@@ -224,8 +224,8 @@ export function CreateEditAnimalProfile(props) {
         });
         if (response.value) {
           Swal.fire(
-            translate("Edit Animal Profile", profile.translate),
-            response.value.data.message,
+            translate("Edit Animal Profile", profile.language),
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           setGetAnimalProfile(true);
@@ -233,8 +233,8 @@ export function CreateEditAnimalProfile(props) {
       }
     } catch (e) {
       Swal.fire(
-        translate("Edit Animal Profile", profile.translate),
-        translate("Error saving Animal Profile", profile.translate),
+        translate("Edit Animal Profile", profile.language),
+        translate("Error saving Animal Profile", profile.language),
         "error"
       );
       setGetAnimalProfile(true);
@@ -249,8 +249,8 @@ export function CreateEditAnimalProfile(props) {
           .catch(() => ({ data: false }));
         if (!responseAnimalProfile.data) {
           return Swal.fire(
-            translate("Edit Animal Profile", profile.translate),
-            translate("Error to search AnimalProfiles", profile.translate),
+            translate("Edit Animal Profile", profile.language),
+            translate("Error to search AnimalProfiles", profile.language),
             "error"
           );
         }
@@ -303,7 +303,7 @@ export function CreateEditAnimalProfile(props) {
       />
       <Block className="animate__animated animate__fadeInUp">
         <BlockHeader>
-          {translate("Animal Profile", profile.translate)}
+          {translate("Animal Profile", profile.language)}
           <Input
             type="switch"
             item={animalProfile}

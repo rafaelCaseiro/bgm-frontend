@@ -124,7 +124,7 @@ export function CreateEditFeedRestrictionProgram(props) {
           }
           Swal.fire(
             translate("Create Feed Restriction Program", profile.language),
-            response.value.data.message,
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           navigate(
@@ -164,7 +164,7 @@ export function CreateEditFeedRestrictionProgram(props) {
         if (response.value) {
           Swal.fire(
             translate("Edit Feed Restriction Program", profile.language),
-            response.value.data.message,
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           setGetFeedRestrictionProgram(true);

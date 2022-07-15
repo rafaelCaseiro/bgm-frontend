@@ -124,7 +124,7 @@ export function CreateEditEnvironmentVariables(props) {
           }
           Swal.fire(
             translate("Create Environment Variables", profile.language),
-            response.value.data.message,
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           navigate(
@@ -164,7 +164,7 @@ export function CreateEditEnvironmentVariables(props) {
         if (response.value) {
           Swal.fire(
             translate("Edit Environment Variables", profile.language),
-            response.value.data.message,
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           setGetEnvironmentVariables(true);

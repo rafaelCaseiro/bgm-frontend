@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { api } from "../../services/api";
@@ -14,15 +14,14 @@ import {
   Title,
   Toolbar,
 } from "./style";
-import { getRoutePath } from "../../utils/globalFunctions";
+import { getRoutePath, translate } from "../../utils/globalFunctions";
+import Profile from "../../contexts/profile";
 
 export function SubHeader({
   title,
   breadcrumbs,
   icon,
   toolbar,
-  history,
-  match,
   route,
   newLabel,
   newLink,
@@ -30,6 +29,8 @@ export function SubHeader({
   exportReport,
   otherButtons,
 }) {
+  const { profile } = useContext(Profile);
+
   const location = useLocation();
 
   const params = useParams();
@@ -174,7 +175,7 @@ export function SubHeader({
           border="text"
           onClick={() => navigate(-1)}
         >
-          Voltar
+          {translate("Back", profile.language)}
         </Button>
       </Toolbar>
     </Container>

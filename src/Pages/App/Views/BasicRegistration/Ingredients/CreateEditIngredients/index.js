@@ -239,7 +239,7 @@ export function CreateEditIngredient(props) {
           }
           Swal.fire(
             translate("Create Ingredient", profile.language),
-            response.value.data.message,
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           navigate(
@@ -276,7 +276,7 @@ export function CreateEditIngredient(props) {
         if (response.value) {
           Swal.fire(
             translate("Edit Ingredient", profile.language),
-            response.value.data.message,
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           setGetIngredient(true);

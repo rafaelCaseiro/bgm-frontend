@@ -405,6 +405,11 @@ export const translate = (text, language) => {
       es: "Aminoácidos (mg/Day)",
     },
     {
+      en: "Amino Acids Requirements (mg)",
+      pt: "Exigência de Aminoácidos (mg)",
+      es: "Exigência de Aminoácidos (mg)",
+    },
+    {
       en: "Energy Partitioning",
       pt: "Partição da Energia",
       es: "Particion de Energia",
@@ -495,6 +500,11 @@ export const translate = (text, language) => {
       es: "EE para deposición lipídica (KJ)",
     },
     {
+      en: "EE for lipids deposition (KJ)",
+      pt: "EE para deposção de lipídeo (KJ)",
+      es: "EE para deposición lipídica (KJ)",
+    },
+    {
       en: "EE for maintenance (KJ)",
       pt: "EE para mantença (KJ)",
       es: "EE para mantenimiento (KJ)",
@@ -517,6 +527,11 @@ export const translate = (text, language) => {
       en: "Effective Energy(J/d)",
       pt: "Energia Efetiva(J/d)",
       es: "Energía Efectiva(J/d)",
+    },
+    {
+      en: "Effective Energy (Mj)",
+      pt: "Energia Efetiva (Mj)",
+      es: "Energía Efectiva (Mj)",
     },
     {
       en: "Metabolizable Energy(cal/d)",
@@ -825,7 +840,7 @@ export const translate = (text, language) => {
     },
     { en: "Temperature(Cº)", pt: "Temperatura(Cº)", es: "Temperatura(Cº)" },
     { en: "Density(m²)", pt: "Densidade(m²)", es: "Densidad(m²)" },
-    { en: "Humidity(%)", pt: "Umiddade(%)", es: "Humedad(%)" },
+    { en: "Humidity(%)", pt: "Umidade(%)", es: "Humedad(%)" },
     {
       en: "Environment Variables",
       pt: "Variáveis de Ambiente",
@@ -905,6 +920,7 @@ export const translate = (text, language) => {
       es: "Datos del Programa de Restrição Alimenticia",
     },
     { en: "Phen +Tir", pt: "Fen +Tir", es: "Fen +Tir" },
+    { en: "Phe + Tyr", pt: "Fen +Tir", es: "Fen +Tir" },
     {
       en: "Digestible Phen +Tyr (%)",
       pt: "Fen +Tir Digestível (%)",
@@ -940,11 +956,21 @@ export const translate = (text, language) => {
       pt: "Valina Digestível (%)",
       es: "Valina Digestible (%)",
     },
+    {
+      en: "Valine (%)",
+      pt: "Valina (%)",
+      es: "Valina (%)",
+    },
     { en: "Gli + Ser", pt: "Gli + Ser", es: "Gli + Ser" },
     {
       en: "Digestible Gli + Ser (%)",
       pt: "Gli + Ser Digestível (%)",
       es: "Gli + Ser Digestible (%)",
+    },
+    {
+      en: "Gli + Ser (%)",
+      pt: "Gli + Ser (%)",
+      es: "Gli + Ser (%)",
     },
     { en: "Arginine", pt: "Arginina", es: "Arginina" },
     {
@@ -952,11 +978,21 @@ export const translate = (text, language) => {
       pt: "Arginina Digestível (%)",
       es: "Arginina Digestible (%)",
     },
+    {
+      en: "Arginine (%)",
+      pt: "Arginina (%)",
+      es: "Arginina (%)",
+    },
     { en: "Tryptophan", pt: "Triptofano", es: "Triptópano" },
     {
       en: "Digestible Tryptophan (%)",
       pt: "Triptofano Digestível (%)",
       es: "Triptópano Digestible (%)",
+    },
+    {
+      en: "Tryptophan (%)",
+      pt: "Triptofano (%)",
+      es: "Triptópano (%)",
     },
     { en: "Treonine", pt: "Treonina", es: "Treonina" },
     {
@@ -964,11 +1000,27 @@ export const translate = (text, language) => {
       pt: "Treonina Digestível (%)",
       es: "Treonina Digestible (%)",
     },
+    { en: "Threonine", pt: "Treonina", es: "Treonina" },
+    {
+      en: "Digestible Threonine (%)",
+      pt: "Treonina Digestível (%)",
+      es: "Treonina Digestible (%)",
+    },
+    {
+      en: "Threonine (%)",
+      pt: "Treonina (%)",
+      es: "Treonina (%)",
+    },
     { en: "Met + Cys", pt: "Met + Cis", es: "Met + Cis" },
     {
       en: "Digestible Met + Cys (%)",
       pt: "Met + Cis Digestível (%)",
       es: "Met + Cis Digestible (%)",
+    },
+    {
+      en: "Met + Cys (%)",
+      pt: "Met + Cis (%)",
+      es: "Met + Cis (%)",
     },
     { en: "Methionine", pt: "Metionina", es: "Metionine" },
     {
@@ -981,6 +1033,12 @@ export const translate = (text, language) => {
     { en: "Lysine", pt: "Lisina", es: "Lisina" },
     { en: "Calcium (%)", pt: "Cálcio (%)", es: "Calcio (%)" },
     { en: "Available P (%)", pt: "P Disponível (%)", es: "P Disponible (%)" },
+    { en: "Total Calcium (%)", pt: "Cálcio Total (%)", es: "Calcio Total (%)" },
+    {
+      en: "Total Calcium (mg)",
+      pt: "Cálcio Total (mg)",
+      es: "Calcio Total (mg)",
+    },
     {
       en: "Available Phosphorus (%)",
       pt: "Fósforo Disponível (%)",
@@ -1452,6 +1510,11 @@ export const translate = (text, language) => {
       en: "Digestible Lysine (%)",
       pt: "Lisina Digestível (%)",
       es: "Lisina Digestible (%)",
+    },
+    {
+      en: "Lysine (%)",
+      pt: "Lisina (%)",
+      es: "Lisina (%)",
     },
     {
       en: "Balanced  Protein (%)",
@@ -2012,7 +2075,7 @@ export const translate = (text, language) => {
     },
     {
       en: "Basic",
-      pt: "Basíca",
+      pt: "Básica",
       es: "Básica",
     },
     {
@@ -2047,6 +2110,11 @@ export const translate = (text, language) => {
     },
     {
       en: "Select the customer",
+      pt: "Selecione o cliente",
+      es: "Seleccione el cliente",
+    },
+    {
+      en: "Select customer",
       pt: "Selecione o cliente",
       es: "Seleccione el cliente",
     },
@@ -2204,6 +2272,61 @@ export const translate = (text, language) => {
       en: "Yes, Create Simulation",
       pt: "Sim, Criar Simulação",
       es: "Si, Crear Simulación",
+    },
+    {
+      en: "Animal Profile Name",
+      pt: "Nome do Perfil Animal",
+      es: "Nombre del Perfile de Animal",
+    },
+    {
+      en: "Diet Program Name",
+      pt: "Nome do Programa de Dieta",
+      es: "Nombre del Programa de dieta",
+    },
+    {
+      en: "Fill in Diet Program data",
+      pt: "Preencha os dados do programa dieta",
+      es: "Complete los datos del programa de dieta",
+    },
+    {
+      en: "Mash or Pellet",
+      pt: "Mash ou Pellet",
+      es: "Mash o Pellet",
+    },
+    {
+      en: "No items found!",
+      pt: "Nenhum item encontrado",
+      es: "¡No se encontraron artículos!",
+    },
+    {
+      en: "Feed Conversion Ratio (g)",
+      pt: "Conversão alimentar (g)",
+      es: "Conversión de alimento (g)",
+    },
+    {
+      en: "Feed Conversion (g)",
+      pt: "Conversão alimentar (g)",
+      es: "Conversión de alimento (g)",
+    },
+    {
+      en: "Standardized Ileal Digestible Phosphorus (%)",
+      pt: "Fósforo Digestível estandartizado (%)",
+      es: "Fósforo digerible estandarizado (%)",
+    },
+    {
+      en: "Standardized Ileal Digestible Phosphorus (mg)",
+      pt: "Fósforo Digestível estandartizado (mg)",
+      es: "Fósforo digerible estandarizado (mg)",
+    },
+    {
+      en: "Item Edited Successfully!",
+      pt: "Item Editado com Sucesso!",
+      es: "¡Elemento editado con éxito!",
+    },
+    {
+      en: "Item Created Successfully!",
+      pt: "Item Criado com Sucesso!",
+      es: "¡Elemento creado con éxito!",
     },
   ];
   config.forEach(function (item) {

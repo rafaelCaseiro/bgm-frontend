@@ -120,7 +120,7 @@ export function CreateEditDietProgram(props) {
           }
           Swal.fire(
             translate("Create Diet Program", profile.language),
-            response.value.data.message,
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           navigate(
@@ -157,7 +157,7 @@ export function CreateEditDietProgram(props) {
         if (response.value) {
           Swal.fire(
             translate("Edit Diet Program", profile.language),
-            response.value.data.message,
+            translate(response.value.data.message, profile.language),
             response.value.err ? "error" : "success"
           );
           setGetDietProgram(true);
